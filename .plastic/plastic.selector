@@ -1,0 +1,4 @@
+repository "Hide-Seek@local"
+  path "/"
+    br "/main"
+    co "/main"

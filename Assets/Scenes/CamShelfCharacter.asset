@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: add8c77c479db4039bf28dcc641b2361, type: 3}
+  m_Name: CamShelfCharacter
+  m_EditorClassIdentifier: Assembly-CSharp::camShelfCharacter
+  location: {x: 5.6254015, y: -2.6463037, z: 0.0000000583547}
+  numberOfCams: 12
+  camID: 3
+  radius: 8
+  _camerapos:
+  - {x: 8, y: 3.5, z: 0}
+  - {x: 6.928203, y: 3.5, z: 4}
+  - {x: 3.9999998, y: 3.5, z: 6.9282036}
+  - {x: -0.0000003496911, y: 3.5, z: 8}
+  - {x: -4.0000005, y: 3.5, z: 6.928203}
+  - {x: -6.928203, y: 3.5, z: 4.0000005}
+  - {x: -8, y: 3.5, z: -0.0000006993822}
+  - {x: -6.928202, y: 3.5, z: -4.0000014}
+  - {x: -3.9999993, y: 3.5, z: -6.9282036}
+  - {x: 0.000000095399045, y: 3.5, z: -8}
+  - {x: 3.9999993, y: 3.5, z: -6.9282036}
+  - {x: 6.9282045, y: 3.5, z: -3.999998}
+  - {x: 8, y: 3.5, z: 0.0000013987644}
+  h: 0
+  neck: 3.5
+  cam_as_origin: 1
+  location_2: {x: 0, y: 0, z: 0}
