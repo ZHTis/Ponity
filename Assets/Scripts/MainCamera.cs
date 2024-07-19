@@ -59,7 +59,7 @@ public class MainCamera : MonoBehaviour
      void SetCam(int i)
     {
         Vector3 relativePos = camShelf._camerapos[i]*(-1);
-        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up)* Quaternion.Euler(-14, 0, 0);
        if(camShelf.cam_as_origin == true)
        {transform.position = camShelf .location+camShelf._camerapos[i]; ;}
        else{transform.position = camShelf._camerapos[i]; ;}

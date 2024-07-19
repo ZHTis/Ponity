@@ -23,7 +23,7 @@ public class pathSimulator : MonoBehaviour
     private Vector3 lastLowestPoint = Vector3.zero;
     private int positionCount;
     private Vector3[] positions;
-    private float simulateOffset=0.7f;
+    private float simulateOffset=0.8f;
 
     // Start is called before the first frame update
     void Awake()

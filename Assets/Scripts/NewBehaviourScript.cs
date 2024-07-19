@@ -14,8 +14,9 @@ public class NewBehaviourScript : MonoBehaviour
 {
     public Camera mainCamera ;
     public Camera Camera2 ;
+    public Camera Camera3 ;
     private string player = "test";
-    private bool withMarker= false;//true;
+    private bool withMarker=false;// true;
     [SerializeField] private GameObject prefab;
     public ponCharacter ponCharacter;
     public targetCharacter targetCharacter;
@@ -27,14 +28,16 @@ public class NewBehaviourScript : MonoBehaviour
     private bool keyPressed =false;
     private float timer;
     private ExpSaveFormat trialData;
+    private bool newSession;
 
 
 /// <summary>
 /// Parameter space
 /// </summary>
-    private int[] repeat = Enumerable.Range(1, 3).ToArray();
-    private float[] ratio = {0.3f, 0.2f, 0.1f};
-    private int[] ponVel;
+    private int repeatCount;
+    private float[] ratio = {1f, 0.3f, 0.2f};
+    private int[] ponVel_x;
+    private int[] ponVel_y;
     private float[]targetDistance ;
     private float[] camNeck;
 
@@ -70,6 +73,12 @@ public class NewBehaviourScript : MonoBehaviour
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         Camera2.enabled = false;
         mainCamera.enabled = true;
+   }
+
+   IEnumerator FinalBreak(){
+       Camera3.enabled = true;
+       mainCamera.enabled = false;
+       yield return null;
    }
 
     void Update()
@@ -159,53 +168,37 @@ public class NewBehaviourScript : MonoBehaviour
    /// <param name="session"></param>
    void defineSession(int session)
    {
-            if (session == 1) {
+            if (session == 1) {                                                       
                 camShelfCharacter.camID = 1;
-                camShelfCharacter.radius = 5.5f;
-                ponVel = Enumerable.Range(1, 5).OrderByDescending(x => x).ToArray();
-                targetDistance =new float[]{1.1f,1.3f,1.6f,1.7f,1.8f};
-                camNeck = new float[]{5,3.5f,2,0} ;
-                targetCharacter.isParallelToViewCanvas = true;
-                // 135
+                camShelfCharacter.radius = 8f;
+                ponVel_x = new int[]{5,7};
+                ponVel_y = new int[]{0,2};
+                targetDistance =new float[]{1.1f,1.7f,2f};
+                camNeck = new float[]{3.5f,2,0} ;
+                targetCharacter.isParallelToViewCanvas = false;
             }
 
             if (session == 2) {
                 camShelfCharacter.camID = 2;
-                camShelfCharacter.radius = 5.5f;
-                ponVel = Enumerable.Range(4, 4).OrderByDescending(x => x).ToArray();
-                targetDistance =new float[]{1.1f,1.3f,1.6f,1.7f,1.8f};
-                camNeck = new float[]{5,3.5f,2,0} ;
-                targetCharacter.isParallelToViewCanvas = true;
-                // 135
+                camShelfCharacter.radius = 8f;
+                ponVel_x = new int[]{5,7};
+                ponVel_y = new int[]{0,2};
+                targetDistance =new float[]{1.1f,1.7f,2f};
+                camNeck = new float[]{3.5f,2,0} ;
+                targetCharacter.isParallelToViewCanvas = false;
+    
             }
 
             if (session == 3) {
                 camShelfCharacter.camID = 3;
-                camShelfCharacter.radius = 8f;
-                ponVel = Enumerable.Range(4, 4).OrderByDescending(x => x).ToArray();
-                targetDistance =new float[]{1.1f,1.2f,1.3f,1.4f,1.5f};
+            camShelfCharacter.radius = 8f;
+                ponVel_x = new int[]{5,7};
+                ponVel_y = new int[]{0,2};
+                targetDistance =new float[]{1.1f,1.3f,1.7f};
                 camNeck = new float[]{3.5f,2,0} ;
                 targetCharacter.isParallelToViewCanvas = false;
-                // 120
             }
 
-            if (session == 4) {
-                camShelfCharacter.camID = 1;
-                camShelfCharacter.radius = 5.5f;
-                ponVel = Enumerable.Range(1, 9).OrderByDescending(x => x).ToArray();
-                targetDistance =new float[]{1.1f,1.3f,1.6f,1.7f,1.8f};
-                camNeck = new float[]{5,3.5f,2,0} ;
-                targetCharacter.isParallelToViewCanvas = false;
-            }
-
-            if (session == 5) {
-                camShelfCharacter.camID = 2;
-                camShelfCharacter.radius = 5.5f;
-                ponVel = Enumerable.Range(3, 9).OrderByDescending(x => x).ToArray();
-                targetDistance =new float[]{1.1f,1.3f,1.6f,1.7f,1.8f};
-                camNeck = new float[]{5,3.5f,2,0} ;
-                targetCharacter.isParallelToViewCanvas = false;
-            }
     }
    
    
@@ -216,28 +209,39 @@ public class NewBehaviourScript : MonoBehaviour
    /// <returns></returns>
     IEnumerator ThisIsIt()
     { 
-        spawnInterval = 1.5f;
-        
-        for(int i = behaviorC.session; i < 6; i++)
+        spawnInterval = 0.1f;
+        repeatCount = 2;
+        newSession = true;
+
+        for(int i = behaviorC.session; i <= 4; i++)
         {
+            if(repeatCount> 1){break;}
+            if(i==4){i=0;Debug.Log("repeat");
+                repeatCount++;}
+               
+            behaviorC.session_interlude = 0; 
             behaviorC.session = i;
             Debug.Log("Session: " + i);
-            defineSession(behaviorC.session);
+            defineSession(behaviorC.session); 
+            newSession = true; 
 
-            for(int p = 0; p < repeat.Length; p++){
-
-            for(int m= behaviorC.session_interlude; m < camNeck.Length; m++)
+            for(int m= behaviorC.session_interlude; m <= camNeck.Length; m++)    //9
             {
+                if(m==camNeck.Length){Debug.Log("complete interlude");m=0;
+                   newSession=false;break;}
                 camShelfCharacter.neck = camNeck[m];
                 behaviorC.session_interlude = m;
-
                 StartCoroutine(exitBreak());
                 yield return new WaitUntil(() => mainCamera.enabled == true);
             
-            for (int j = 0; j < targetDistance.Length; j++){
-                for (int k = 0; k < ratio.Length; k++){
-                    for (int l = 0; l < ponVel.Length; l++){   
-            ponCharacter.vel_x = ponVel[l];
+            for (int j = 0; j < targetDistance.Length; j++){       //5
+            Debug.Log("targetDistance: " + targetDistance[j]);
+                for(int y = 0; y < ponVel_y.Length; y++){        //2
+                    for (int k = 0; k < ratio.Length; k++){           //3
+                        for (int l = 0; l < ponVel_x.Length; l++){   //2
+                            
+            ponCharacter.vel_y = ponVel_y[y];
+            ponCharacter.vel_x = ponVel_x[l];
             targetCharacter.distance = targetDistance[j];
             behaviorC.ratio = ratio[k];
             targetRandomize();  
@@ -246,16 +250,15 @@ public class NewBehaviourScript : MonoBehaviour
             timer = 0f;
             yield return new WaitUntil(() => timer > spawnInterval || keyPressed == true);
             yield return new WaitForSeconds(0.5f);
-            DestroyPrefab(GameObject.Find("Pon(Clone)")); }
+            DestroyPrefab(GameObject.Find("Pon(Clone)")); }}
 
             }
-            } EnterBreak(); //ratio*vel*diastance = break, then repeat
-   
-            
-        }}
+            } EnterBreak(); }
+        }
 
-    }
-    
+        Debug.Log("completed all trials"); 
+        StartCoroutine(FinalBreak());
+        
     }
 
     void DestroyPrefab(GameObject prefab)
@@ -316,6 +319,7 @@ public class NewBehaviourScript : MonoBehaviour
             }
     }
 }
+
 
 
 

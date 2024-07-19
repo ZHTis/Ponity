@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac2b85f1e1404b19b55118d0972d0f3, type: 3}
   m_Name: ponCharacter
   m_EditorClassIdentifier: 
-  vel_x: 8
+  vel_x: 7
   vel_y: 0
   withMarker: 0
   isKinematic: 0
   IniPosition: {x: 0, y: 0, z: 0}
-  kinematicPosition: {x: 0.16, y: -0.003924, z: 0}
+  kinematicPosition: {x: 0.14, y: -0.003924, z: 0}
   kinematicPosGiven: 1
   pauseBeforeFire: 0
