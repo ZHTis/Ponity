@@ -162,7 +162,7 @@ public class NewBehaviourScript : MonoBehaviour
             if (session == 1) {
                 camShelfCharacter.camID = 1;
                 camShelfCharacter.radius = 5.5f;
-                ponVel = Enumerable.Range(1, 9).OrderByDescending(x => x).ToArray();
+                ponVel = Enumerable.Range(1, 5).OrderByDescending(x => x).ToArray();
                 targetDistance =new float[]{1.1f,1.3f,1.6f,1.7f,1.8f};
                 camNeck = new float[]{5,3.5f,2,0} ;
                 targetCharacter.isParallelToViewCanvas = true;
@@ -172,7 +172,7 @@ public class NewBehaviourScript : MonoBehaviour
             if (session == 2) {
                 camShelfCharacter.camID = 2;
                 camShelfCharacter.radius = 5.5f;
-                ponVel = Enumerable.Range(3, 9).OrderByDescending(x => x).ToArray();
+                ponVel = Enumerable.Range(4, 4).OrderByDescending(x => x).ToArray();
                 targetDistance =new float[]{1.1f,1.3f,1.6f,1.7f,1.8f};
                 camNeck = new float[]{5,3.5f,2,0} ;
                 targetCharacter.isParallelToViewCanvas = true;
@@ -182,7 +182,7 @@ public class NewBehaviourScript : MonoBehaviour
             if (session == 3) {
                 camShelfCharacter.camID = 3;
                 camShelfCharacter.radius = 8f;
-                ponVel = Enumerable.Range(2, 4).OrderByDescending(x => x).ToArray();
+                ponVel = Enumerable.Range(4, 4).OrderByDescending(x => x).ToArray();
                 targetDistance =new float[]{1.1f,1.2f,1.3f,1.4f,1.5f};
                 camNeck = new float[]{3.5f,2,0} ;
                 targetCharacter.isParallelToViewCanvas = false;
