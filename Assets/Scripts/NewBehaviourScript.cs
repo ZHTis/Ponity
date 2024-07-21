@@ -28,8 +28,6 @@ public class NewBehaviourScript : MonoBehaviour
     private bool keyPressed =false;
     private float timer;
     private ExpSaveFormat trialData;
-    private bool newSession;
-
 
 /// <summary>
 /// Parameter space
@@ -75,10 +73,11 @@ public class NewBehaviourScript : MonoBehaviour
         mainCamera.enabled = true;
    }
 
-   IEnumerator FinalBreak(){
+   void FinalBreak(){
        Camera3.enabled = true;
+       Camera2.enabled = false;
        mainCamera.enabled = false;
-       yield return null;
+
    }
 
     void Update()
@@ -168,7 +167,7 @@ public class NewBehaviourScript : MonoBehaviour
    /// <param name="session"></param>
    void defineSession(int session)
    {
-            if (session == 1) {                                                       
+            if (session == 0) {                                                       
                 camShelfCharacter.camID = 1;
                 camShelfCharacter.radius = 8f;
                 ponVel_x = new int[]{5,7};
@@ -178,7 +177,7 @@ public class NewBehaviourScript : MonoBehaviour
                 targetCharacter.isParallelToViewCanvas = false;
             }
 
-            if (session == 2) {
+            if (session == 1) {
                 camShelfCharacter.camID = 2;
                 camShelfCharacter.radius = 8f;
                 ponVel_x = new int[]{5,7};
@@ -189,7 +188,7 @@ public class NewBehaviourScript : MonoBehaviour
     
             }
 
-            if (session == 3) {
+            if (session == 2) {
                 camShelfCharacter.camID = 3;
             camShelfCharacter.radius = 8f;
                 ponVel_x = new int[]{5,7};
@@ -210,31 +209,30 @@ public class NewBehaviourScript : MonoBehaviour
     IEnumerator ThisIsIt()
     { 
         spawnInterval = 0.1f;
-        repeatCount = 2;
-        newSession = true;
+        repeatCount = 0;
+        int sessionLenth = 3;
 
-        for(int i = behaviorC.session; i <= 4; i++)
+        for(int i = behaviorC.session; i <= sessionLenth; i++)
         {
-            if(repeatCount> 1){break;}
-            if(i==4){i=0;Debug.Log("repeat");
-                repeatCount++;}
-               
-            behaviorC.session_interlude = 0; 
+            if(i==sessionLenth){Debug.Log("repeat");
+                repeatCount++;Debug.Log("repeatCount: " + repeatCount);
+                i=0;}
+            if(repeatCount>= 10){Debug.Log("completed all trials"); FinalBreak();break;}
+
             behaviorC.session = i;
             Debug.Log("Session: " + i);
             defineSession(behaviorC.session); 
-            newSession = true; 
 
-            for(int m= behaviorC.session_interlude; m <= camNeck.Length; m++)    //9
+            for(int m= behaviorC.session_interlude; m <= camNeck.Length; m++)    //3
             {
-                if(m==camNeck.Length){Debug.Log("complete interlude");m=0;
-                   newSession=false;break;}
+                if(m==camNeck.Length){Debug.Log("complete interlude");m=0;behaviorC.session_interlude = 0; 
+                   break;}
                 camShelfCharacter.neck = camNeck[m];
                 behaviorC.session_interlude = m;
                 StartCoroutine(exitBreak());
                 yield return new WaitUntil(() => mainCamera.enabled == true);
             
-            for (int j = 0; j < targetDistance.Length; j++){       //5
+            for (int j = 0; j < targetDistance.Length; j++){       //3
             Debug.Log("targetDistance: " + targetDistance[j]);
                 for(int y = 0; y < ponVel_y.Length; y++){        //2
                     for (int k = 0; k < ratio.Length; k++){           //3
@@ -256,8 +254,7 @@ public class NewBehaviourScript : MonoBehaviour
             } EnterBreak(); }
         }
 
-        Debug.Log("completed all trials"); 
-        StartCoroutine(FinalBreak());
+      
         
     }
 

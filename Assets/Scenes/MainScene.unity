@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44721478, g: 0.49713773, b: 0.5751718, a: 1}
+  m_IndirectSpecularColor: {r: 0.4472093, g: 0.4971329, b: 0.5751678, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -633,7 +633,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049746810}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1049746812
 Camera:
   m_ObjectHideFlags: 0
@@ -708,6 +708,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1815893626}
     m_Modifications:
+    - target: {fileID: 699396076689499594, guid: d35afba5581f740608120771bd9ed76b, type: 3}
+      propertyPath: _pon
+      value: 
+      objectReference: {fileID: 8415762669439668880, guid: 7986f4ccad9d84e6280b7498042e51cb, type: 3}
+    - target: {fileID: 699396076689499594, guid: d35afba5581f740608120771bd9ed76b, type: 3}
+      propertyPath: _ponCharacter
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e0c48c9041984149a08fced58fc9333, type: 2}
+    - target: {fileID: 699396076689499594, guid: d35afba5581f740608120771bd9ed76b, type: 3}
+      propertyPath: targetCharacter
+      value: 
+      objectReference: {fileID: 11400000, guid: c96c8732f3c844ee49debef490921312, type: 2}
+    - target: {fileID: 699396076689499594, guid: d35afba5581f740608120771bd9ed76b, type: 3}
+      propertyPath: _obstaclesParent
+      value: 
+      objectReference: {fileID: 464523603}
+    - target: {fileID: 2850025553869189229, guid: d35afba5581f740608120771bd9ed76b, type: 3}
+      propertyPath: m_Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850025553869189229, guid: d35afba5581f740608120771bd9ed76b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850025553869189229, guid: d35afba5581f740608120771bd9ed76b, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0.0037651062
+      objectReference: {fileID: 0}
+    - target: {fileID: 2850025553869189229, guid: d35afba5581f740608120771bd9ed76b, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.30973434
+      objectReference: {fileID: 0}
     - target: {fileID: 699396076689499594, guid: 27b8f997c2ab24fa3a360b07a3775d1a, type: 3}
       propertyPath: _pon
       value: 
@@ -779,38 +811,6 @@ PrefabInstance:
     - target: {fileID: 6901251818302135554, guid: 27b8f997c2ab24fa3a360b07a3775d1a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 699396076689499594, guid: d35afba5581f740608120771bd9ed76b, type: 3}
-      propertyPath: _pon
-      value: 
-      objectReference: {fileID: 8415762669439668880, guid: 7986f4ccad9d84e6280b7498042e51cb, type: 3}
-    - target: {fileID: 699396076689499594, guid: d35afba5581f740608120771bd9ed76b, type: 3}
-      propertyPath: _ponCharacter
-      value: 
-      objectReference: {fileID: 11400000, guid: 0e0c48c9041984149a08fced58fc9333, type: 2}
-    - target: {fileID: 699396076689499594, guid: d35afba5581f740608120771bd9ed76b, type: 3}
-      propertyPath: targetCharacter
-      value: 
-      objectReference: {fileID: 11400000, guid: c96c8732f3c844ee49debef490921312, type: 2}
-    - target: {fileID: 699396076689499594, guid: d35afba5581f740608120771bd9ed76b, type: 3}
-      propertyPath: _obstaclesParent
-      value: 
-      objectReference: {fileID: 464523603}
-    - target: {fileID: 2850025553869189229, guid: d35afba5581f740608120771bd9ed76b, type: 3}
-      propertyPath: m_Loop
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2850025553869189229, guid: d35afba5581f740608120771bd9ed76b, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2850025553869189229, guid: d35afba5581f740608120771bd9ed76b, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0.0037651062
-      objectReference: {fileID: 0}
-    - target: {fileID: 2850025553869189229, guid: d35afba5581f740608120771bd9ed76b, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.30973434
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

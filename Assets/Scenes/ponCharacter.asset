@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: ponCharacter
   m_EditorClassIdentifier: 
   vel_x: 7
-  vel_y: 0
+  vel_y: 2
   withMarker: 0
   isKinematic: 0
   IniPosition: {x: 0, y: 0, z: 0}
-  kinematicPosition: {x: 0.14, y: -0.003924, z: 0}
+  kinematicPosition: {x: 0.14, y: 0.036075998, z: 0}
   kinematicPosGiven: 1
   pauseBeforeFire: 0

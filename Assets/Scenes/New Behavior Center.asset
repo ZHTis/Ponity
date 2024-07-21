@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f31ee81b5cb4ed0a7351683de6392b, type: 3}
   m_Name: New Behavior Center
   m_EditorClassIdentifier: 
-  trial: 0
-  session: 3
+  trial: 72
+  session: 2
   session_interlude: 1
   ratio: 0.2
   correctCount: 0
   correctRate: 0
   isCorrect: 0
-  filePath: test-07-19-18-15-14-2024.csv
+  filePath: test-07-21-13-53-44-2024.csv
   PlayerName: test
   choice: 
   touchTime: 0
-  initTime: 0
+  initTime: 45.708218
