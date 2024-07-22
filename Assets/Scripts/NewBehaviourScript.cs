@@ -120,13 +120,14 @@ public class NewBehaviourScript : MonoBehaviour
                 {
             behaviorC.choice = "abort";
             keyPressed = true;
+            Debug.Log("Abort");
             behaviorC.touchTimefromInit = Time.time-behaviorC.initTime;
             if(ponCharacter.kinematicTime!=0){behaviorC.touchTimefromPause = Time.time-ponCharacter.kinematicTime;}
             createExpDataSlot(out trialData);
             trialDataList.Add(trialData);
             behaviorC.OnValidate();
         }
-       
+                
 
     }
 
@@ -220,7 +221,7 @@ public class NewBehaviourScript : MonoBehaviour
             break;
 
         case 3:
-                ratio = new float[] {0.1f,0.2f,0.3f,0.4f,0.5f,0.6f};
+                ratio = new float[] {0.1f,0.15f,0.2f,0.25f,0.3f,0.35f,0.4f,0.5f,0.6f};
                 camIDList = new int[] {1,2,3};
                 camShelfCharacter.radius = 8f;
                 ponCharacter.vel_x = 5;
