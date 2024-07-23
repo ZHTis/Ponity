@@ -830,6 +830,7 @@ GameObject:
   - component: {fileID: 1586192998}
   - component: {fileID: 1586192997}
   - component: {fileID: 1586193001}
+  - component: {fileID: 1586193002}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -951,6 +952,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1586193002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586192996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 528a2a5af85707849a09e8168819098b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gazeOrigin: {fileID: 0}
+  gazeController: {fileID: 0}
+  confidenceThreshold: 0.6
+  binocularOnly: 1
+  projectionMarker: {fileID: 0}
+  gazeDirectionMarker: {fileID: 0}
+  sphereCastRadius: 0.05
 --- !u!1 &1716940009
 GameObject:
   m_ObjectHideFlags: 0
