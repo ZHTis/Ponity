@@ -1,7 +1,8 @@
 public class ExpSaveFormat
     {
 
-       public int trial; 
+       public int trial;
+       public int session; 
         public string choice ;
         public bool isCorrect ;
         public float touchTimefromInit;

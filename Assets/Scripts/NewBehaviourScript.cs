@@ -36,6 +36,7 @@ public class NewBehaviourScript : MonoBehaviour
     private float[] camNeck;
     private int[] camIDList;
     private bool abortAllowed=false;
+    private int[] sessionList;
 
 
 
@@ -196,6 +197,7 @@ public class NewBehaviourScript : MonoBehaviour
             camNeck = new float[]{3.5f,2,0} ;
             targetCharacter.isParallelToViewCanvas = false;
             ratio = new float[] {1.2f, 0.3f, 0.2f}; 
+            Physics.gravity = new Vector3(0, -9.8f, 0);
             break;
 
         case 1:
@@ -207,6 +209,7 @@ public class NewBehaviourScript : MonoBehaviour
             camNeck = new float[]{3.5f,2,0} ;
             targetCharacter.isParallelToViewCanvas = false;
             ratio = new float[] {1.2f, 0.3f, 0.2f};
+            Physics.gravity = new Vector3(0, -9.8f, 0);
             break;
 
         case 2:
@@ -218,6 +221,7 @@ public class NewBehaviourScript : MonoBehaviour
             camNeck = new float[]{3.5f,2,0} ;
             targetCharacter.isParallelToViewCanvas = false;
             ratio = new float[] {1.2f, 0.3f, 0.2f};
+            Physics.gravity = new Vector3(0, -9.8f, 0);
             break;
 
         case 3:
@@ -229,7 +233,19 @@ public class NewBehaviourScript : MonoBehaviour
                 targetDistance =new float[]{1.1f,1.3f,1.7f};
                 camNeck = new float[]{3.5f,2,0} ;
                 targetCharacter.isParallelToViewCanvas = false; 
+                Physics.gravity = new Vector3(0, -9.8f, 0);
                 break;
+        case 4:
+                ratio = new float[] {0.1f,0.15f,0.2f,0.25f,0.3f,0.35f,0.4f,0.5f,0.6f};
+                camIDList = new int[] {1,2,3};
+                camShelfCharacter.radius = 8f;
+                ponCharacter.vel_x = 5;
+                ponCharacter.vel_y = -4;
+                targetDistance =new float[]{1.1f,1.3f,1.7f};
+                camNeck = new float[]{3.5f,2,0} ;
+                targetCharacter.isParallelToViewCanvas = false; 
+                Physics.gravity = new Vector3(0, 0, 0);
+                break;  
 
     }
     }
@@ -295,11 +311,13 @@ public class NewBehaviourScript : MonoBehaviour
                 break;
             
             case 1:
-                defineSession(3);
+                
                 abortAllowed = true;
-                behaviorC.session = 3;
+                sessionList = new int[] {3,4};
 
-                for (int i = 0; i < camIDList.Length; i++){
+                for (int s = 0; s < sessionList.Length; s++){
+                    defineSession(sessionList[s]);behaviorC.session = sessionList[s];
+                    for (int i = 0; i < camIDList.Length; i++){
                     for (int j = 0; j < camNeck.Length; j++){
                         for (int d = 0; d < targetDistance.Length; d++)
                         {
@@ -315,8 +333,11 @@ public class NewBehaviourScript : MonoBehaviour
                 yield return new WaitUntil(() => timer > waitbeforechoice+ratio[r]+0.5 || keyPressed == true);
                 yield return new WaitForSeconds(0.5f);
                 DestroyPrefab(GameObject.Find("Pon(Clone)")); 
-                if(behaviorC.isCorrect==true ){Debug.Log("rayray"); break;}
+                //if(behaviorC.isCorrect==true ){Debug.Log("rayray"); break;}
                 } } } }
+                EnterBreak();StartCoroutine(exitBreak());
+                }
+                FinalBreak();
                 break;
         
         }    
@@ -344,6 +365,7 @@ public class NewBehaviourScript : MonoBehaviour
     {  ExpSaveFormat expData= new ExpSaveFormat();
 
        {expData.trial = behaviorC.trial;
+       expData.session= behaviorC.session;
        expData.choice = behaviorC.choice;
        expData.isCorrect = behaviorC.isCorrect;
         expData.touchTimefromInit= behaviorC.touchTimefromInit;
