@@ -9,7 +9,7 @@ public class ponCharacter : ScriptableObject
    [Range(0f, 17f)]
    [Tooltip("vel_x")]
     public float vel_x;
-    [Range(0f, 7f)]
+    [Range(-7f, 7f)]
     [Tooltip("vel_y")]
     public float vel_y;
     public bool withMarker;

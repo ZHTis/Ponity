@@ -11,7 +11,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Camera mainCamera ;
     public Camera Camera2 ;
     public Camera Camera3 ;
-    private string player = "test";
+    private string player = "ziyi";
     private bool withMarker=false;//true;
     [SerializeField] private GameObject prefab;
     public ponCharacter ponCharacter;
@@ -230,7 +230,7 @@ public class NewBehaviourScript : MonoBehaviour
                 camShelfCharacter.radius = 8f;
                 ponCharacter.vel_x = 5;
                 ponCharacter.vel_y = 2;
-                targetDistance =new float[]{1.1f,1.3f,1.7f};
+                targetDistance =new float[]{1.1f,1.15f,1.2f,1.3f,1.7f};
                 camNeck = new float[]{3.5f,2,0} ;
                 targetCharacter.isParallelToViewCanvas = false; 
                 Physics.gravity = new Vector3(0, -9.8f, 0);
@@ -241,7 +241,7 @@ public class NewBehaviourScript : MonoBehaviour
                 camShelfCharacter.radius = 8f;
                 ponCharacter.vel_x = 5;
                 ponCharacter.vel_y = -4;
-                targetDistance =new float[]{1.1f,1.3f,1.7f};
+                targetDistance =new float[]{1.1f,1.15f,1.2f,1.3f,1.7f};
                 camNeck = new float[]{3.5f,2,0} ;
                 targetCharacter.isParallelToViewCanvas = false; 
                 Physics.gravity = new Vector3(0, 0, 0);
@@ -250,7 +250,22 @@ public class NewBehaviourScript : MonoBehaviour
     }
     }
    
-   
+   void Shuffle<T>(T[] array){
+    int n = array.Length;
+    System.Random random = new System.Random();
+
+            for (int i = 0; i < n - 1; i++)
+            {
+                int j =random.Next(i, n);
+
+                if (j != i)
+                {
+                    T temp = array[i];
+                    array[i] = array[j];
+                    array[j] = temp;
+                }
+            }
+   }
 
    /// <summary>
    /// main trial loop
@@ -317,6 +332,8 @@ public class NewBehaviourScript : MonoBehaviour
 
                 for (int s = 0; s < sessionList.Length; s++){
                     defineSession(sessionList[s]);behaviorC.session = sessionList[s];
+                    Shuffle<int>(camIDList);
+                    Shuffle<float>(camNeck);
                     for (int i = 0; i < camIDList.Length; i++){
                     for (int j = 0; j < camNeck.Length; j++){
                         for (int d = 0; d < targetDistance.Length; d++)
@@ -328,6 +345,7 @@ public class NewBehaviourScript : MonoBehaviour
                 {
                 behaviorC.ratio = ratio[r];
                 targetRandomize();  
+                yield return new WaitUntil(() => mainCamera.enabled == true);
                 Fire(ratio[r]+waitbeforechoice);
                 timer = 0f;
                 yield return new WaitUntil(() => timer > waitbeforechoice+ratio[r]+0.5 || keyPressed == true);
