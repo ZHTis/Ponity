@@ -20,6 +20,6 @@ public class coinHub : MonoBehaviour
 
     private void Spawn()
     {
-        Instantiate(prefab, new Vector3(100,2,2), Quaternion.identity);
+        Instantiate(prefab, new Vector3(50,2,2), Quaternion.identity);
     }
 }

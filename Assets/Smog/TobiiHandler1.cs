@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tobii.Research;
 
-public class TobiiHandler : MonoBehaviour
+public class TobiiHandler1 : MonoBehaviour
 {
     public GameObject cursor;
-    public GameObject Size;
+    public GameObject SizeLeft;
+    public GameObject SizeRight;
     Vector3 worldPos;
     public Camera maincamera;
     Tobii.Research.PupilData LeftPupilData;
+    Tobii.Research.PupilData RightPupilData;
 
     IEyeTracker Fourc;
 
     [Tooltip("Distance from screen to visualization plane in the World.")]
-	public float VisualizationDistance = 10f;
+	public float VisualizationDistance = 30f;
 
 
 
@@ -22,7 +24,7 @@ public class TobiiHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cursor.transform.localScale = new Vector3(1f, 1f, 1f) * 0.1f;
+        cursor.transform.localScale = new Vector3(1f, 1f, 1f) * 0.2f;
         ProGetDevice(); 
         Subscribe();
     }
@@ -31,7 +33,8 @@ public class TobiiHandler : MonoBehaviour
     void Update()
     {
         UsingGamingtoShowGazePosition();
-        Size.transform.localScale = new Vector3(LeftPupilData.PupilDiameter, LeftPupilData.PupilDiameter, LeftPupilData.PupilDiameter);
+        SizeLeft.transform.localScale = new Vector3(LeftPupilData.PupilDiameter, LeftPupilData.PupilDiameter, LeftPupilData.PupilDiameter);
+        SizeRight.transform.localScale = new Vector3(RightPupilData.PupilDiameter, RightPupilData.PupilDiameter, RightPupilData.PupilDiameter);
     }
 
 
@@ -41,7 +44,7 @@ public class TobiiHandler : MonoBehaviour
         if(gazePoint.IsValid){
         Vector3 screenPos = gazePoint.Screen;
         screenPos += (transform.forward * VisualizationDistance);
-        worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        worldPos = maincamera.ScreenToWorldPoint(screenPos);
         cursor.transform.position = worldPos;
         //Debug.Log("worldPos"+  worldPos);
         }
@@ -51,8 +54,9 @@ public class TobiiHandler : MonoBehaviour
         
         Tobii.Research.GazePoint LeftGazePoint = e.LeftEye.GazePoint;
         LeftPupilData = e.LeftEye.Pupil;
-        Debug.Log("Got gaze data with:" + LeftGazePoint.PositionOnDisplayArea);
-        Debug.Log("Got pupil data with:" + LeftPupilData.PupilDiameter );
+        //Debug.Log("Got gaze data with:" + LeftGazePoint.PositionOnDisplayArea);
+        //Debug.Log("Got pupil data with:" + LeftPupilData.PupilDiameter );
+        RightPupilData = e.RightEye.Pupil;
         
     }
 
