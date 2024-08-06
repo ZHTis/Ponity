@@ -1554,6 +1554,10 @@ PrefabInstance:
       propertyPath: behaviorC
       value: 
       objectReference: {fileID: 11400000, guid: 45d0562d2bf91446387365909c25baf7, type: 2}
+    - target: {fileID: -2654809548489122021, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
+      propertyPath: trialState
+      value: 
+      objectReference: {fileID: 11400000, guid: b9f0ee9086cd80049b11a3d3bbd56884, type: 2}
     - target: {fileID: 284441181710324029, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
       propertyPath: m_Layer
       value: 5

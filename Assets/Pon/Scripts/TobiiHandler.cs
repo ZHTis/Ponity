@@ -22,8 +22,7 @@ public class TobiiHandler : MonoBehaviour
     RectTransform canvas;
     public List<EyeFormat> eyeDataToSave;
     public EyeFormat perEye;
-    public int  TrialTag=0;
-    public int  FrameTag=0;
+
     public TrialState trialState;
 
 
@@ -48,13 +47,6 @@ public class TobiiHandler : MonoBehaviour
     {
       GazePlot();
       //Refresh tags
-      if(trialState.ifTrialAltered == true){
-        trialState.FrameTag +=1;
-      }
-      if(trialState.ifTrialAltered ==false){
-        trialState.FrameTag =0;
-      }
-    
     }
 
 
@@ -101,8 +93,8 @@ public class TobiiHandler : MonoBehaviour
         perEye.SystemTimeStamp = e.SystemTimeStamp;
         perEye.Validity = string.Format("{0},{1},{2},{3}", LeftGaze.Validity.ToString(), RightGaze.Validity.ToString(),
              LeftPupilData.Validity.ToString(), LeftPupilData.Validity.ToString());
-        perEye.TrailTag = TrialTag;
-        perEye.FrameTag = FrameTag;
+        perEye.TrailTag = trialState.TrialTag;
+        perEye.FrameTag = trialState.FrameTag;
         eyeDataToSave.Add(perEye);
     }
 

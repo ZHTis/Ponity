@@ -79,6 +79,14 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Update()
     {
+        if( trialState.frameReadyToReset == false){
+        trialState.FrameTag +=1;
+      }
+      if(trialState.frameReadyToReset == true){
+          trialState.FrameTag =0;
+          trialState.frameReadyToReset =  false;
+          }
+    
         timer += Time.deltaTime;
         claimAnswer();
 
@@ -100,6 +108,7 @@ public class NewBehaviourScript : MonoBehaviour
                 targetCharacter.makeInvisible = true;
                 //Debug.Log(targetCharacter.makeInvisible);
             }
+
 
             ///record trial data
             createExpDataSlot(out trialData);
@@ -135,6 +144,7 @@ public class NewBehaviourScript : MonoBehaviour
        if(realFire == true)
        {
         behaviorC.trial += 1;
+        trialState.TrialTag = behaviorC.trial;
        keyPressed = false;
        ponCharacter.kinematicPosGiven = false;
        behaviorC.initTime = Time.time;
@@ -348,8 +358,6 @@ public class NewBehaviourScript : MonoBehaviour
                             targetCharacter.distance = targetDistance[d];
                             for (int r=0; r<ratio.Length; r++)
                 {
-                trialState.ifTrialAltered = true;
-                trialState.TrialTag = behaviorC.trial;
                 behaviorC.ratio = ratio[r];
                 targetRandomize();  
                 yield return new WaitUntil(() => mainCamera.enabled == true);
@@ -358,8 +366,8 @@ public class NewBehaviourScript : MonoBehaviour
                 yield return new WaitUntil(() => timer > waitbeforechoice+ratio[r]+0.5 || keyPressed == true);
                 yield return new WaitForSeconds(0.5f);
                 DestroyPrefab(GameObject.Find("Pon(Clone)")); 
-                trialState.ifTrialAltered = false ;
-                //if(behaviorC.isCorrect==true ){Debug.Log("rayray"); break;}
+
+                trialState.frameReadyToReset = true;
                 } } } }
                 EnterBreak();StartCoroutine(exitBreak());
                 }
