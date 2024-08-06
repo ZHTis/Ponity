@@ -38,7 +38,7 @@ public class behaviorCenter : ScriptableObject
        touchTimefromPause = 0f;
        initTime = 0f;
        isCorrect = false;
-       filePath = PlayerName + DateTime.Now.ToString("-MM-dd-HH-mm-ss-yyyy") + ".csv";
+       filePath = PlayerName + DateTime.Now.ToString("-MM-dd-HH-mm-ss-yyyy") ;
    }
 
    //run after each choice

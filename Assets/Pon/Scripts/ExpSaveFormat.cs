@@ -18,6 +18,9 @@ public class ExpSaveFormat
         public float camNeck ;
         public float targetsDistance ;
         public bool isParallelToViewCanvas;
+        public Tobii.Research.EyeData LefteyeData;
+        public Tobii.Research.EyeData RighteyeData;
+        public float timeTag;
     }
 
 

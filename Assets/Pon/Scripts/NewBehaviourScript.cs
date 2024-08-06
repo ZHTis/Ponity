@@ -11,7 +11,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Camera mainCamera ;
     public Camera Camera2 ;
     public Camera Camera3 ;
-    private string player = "xiaochun";
+
     private bool withMarker=false;//true;
     [SerializeField] private GameObject prefab;
     public ponCharacter ponCharacter;
@@ -24,7 +24,8 @@ public class NewBehaviourScript : MonoBehaviour
     private bool keyPressed =false;
     private float timer;
     private ExpSaveFormat trialData;
-
+    public TrialState trialState;
+    private bool ifShuffle = false;
 /// <summary>
 /// Parameter space
 /// </summary>
@@ -41,19 +42,15 @@ public class NewBehaviourScript : MonoBehaviour
 
 
     void Awake(){
-      Cursor.visible = false;
+        Cursor.visible = false;
+        behaviorC.Reset();
+        trialDataList = new List<ExpSaveFormat>();
+        ponCharacter.withMarker = withMarker;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        behaviorC.Reset();
-        behaviorC.PlayerName = player;
-
-        trialDataList = new List<ExpSaveFormat>();
-
-        ponCharacter.withMarker = withMarker;
-
         //StartCoroutine(DebugCharacter());
 
         EnterBreak();
@@ -267,6 +264,12 @@ public class NewBehaviourScript : MonoBehaviour
             }
    }
 
+   void if_Shuffle<T>(T[] list, bool shuffle){
+
+    if(shuffle){Shuffle(list);}
+    if(!shuffle){}
+   }
+
    /// <summary>
    /// main trial loop
    /// </summary>
@@ -332,8 +335,10 @@ public class NewBehaviourScript : MonoBehaviour
 
                 for (int s = 0; s < sessionList.Length; s++){
                     defineSession(sessionList[s]);behaviorC.session = sessionList[s];
-                    Shuffle<int>(camIDList);
-                    Shuffle<float>(camNeck);
+
+                    if_Shuffle<int>(camIDList, ifShuffle);
+                    if_Shuffle<float>(camNeck, ifShuffle); //if change sessions in a decending order
+
                     for (int i = 0; i < camIDList.Length; i++){
                     for (int j = 0; j < camNeck.Length; j++){
                         for (int d = 0; d < targetDistance.Length; d++)
@@ -343,6 +348,8 @@ public class NewBehaviourScript : MonoBehaviour
                             targetCharacter.distance = targetDistance[d];
                             for (int r=0; r<ratio.Length; r++)
                 {
+                trialState.ifTrialAltered = true;
+                trialState.TrialTag = behaviorC.trial;
                 behaviorC.ratio = ratio[r];
                 targetRandomize();  
                 yield return new WaitUntil(() => mainCamera.enabled == true);
@@ -351,6 +358,7 @@ public class NewBehaviourScript : MonoBehaviour
                 yield return new WaitUntil(() => timer > waitbeforechoice+ratio[r]+0.5 || keyPressed == true);
                 yield return new WaitForSeconds(0.5f);
                 DestroyPrefab(GameObject.Find("Pon(Clone)")); 
+                trialState.ifTrialAltered = false ;
                 //if(behaviorC.isCorrect==true ){Debug.Log("rayray"); break;}
                 } } } }
                 EnterBreak();StartCoroutine(exitBreak());
@@ -368,16 +376,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     void OnDestroy()
     {
-       string jsonData  = JsonConvert.SerializeObject(trialDataList);
-       Debug.Log(jsonData);
-       Debug.Log(Application.dataPath + "/Resources");
-       if (!Directory.Exists(Application.dataPath + "/Resources")){
-           Directory.CreateDirectory(Application.dataPath + "/Resources");
-       }
-       File.WriteAllText
-        (Application.dataPath + "/Resources/"  + behaviorC.filePath + ".json", 
-        jsonData);
-    
+        DataOutput dataOutput = new DataOutput();
+        dataOutput.SaveData<ExpSaveFormat>(trialDataList, "/Resources/", behaviorC.PlayerName); 
     }
     
     public ExpSaveFormat createExpDataSlot(out ExpSaveFormat trialData)

@@ -1433,6 +1433,7 @@ MonoBehaviour:
   targetCharacter: {fileID: 11400000, guid: 615c9e95e49ba42cd8bfe14a9dc41c68, type: 2}
   camShelfCharacter: {fileID: 11400000, guid: 30fc86ddc0d034cf5bbafbbd84e689c0, type: 2}
   behaviorC: {fileID: 11400000, guid: 45d0562d2bf91446387365909c25baf7, type: 2}
+  trialState: {fileID: 11400000, guid: b9f0ee9086cd80049b11a3d3bbd56884, type: 2}
 --- !u!1 &1921635901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,6 +1550,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2654809548489122021, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
+      propertyPath: behaviorC
+      value: 
+      objectReference: {fileID: 11400000, guid: 45d0562d2bf91446387365909c25baf7, type: 2}
     - target: {fileID: 284441181710324029, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -1556,6 +1561,14 @@ PrefabInstance:
     - target: {fileID: 2543090876737791380, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
       propertyPath: m_Name
       value: TobiiHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852853444243269278, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852853444243269278, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6844625242535175808, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
       propertyPath: m_LocalPosition.x
