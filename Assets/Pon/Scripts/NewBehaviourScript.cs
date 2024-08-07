@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO; 
 using Newtonsoft.Json;
 using System;
+using UnityEngine.Apple.ReplayKit;
 
 
 public class NewBehaviourScript : MonoBehaviour
@@ -26,6 +27,9 @@ public class NewBehaviourScript : MonoBehaviour
     private ExpSaveFormat trialData;
     public TrialState trialState;
     private bool ifShuffle = false;
+    
+
+
 /// <summary>
 /// Parameter space
 /// </summary>
@@ -109,13 +113,6 @@ public class NewBehaviourScript : MonoBehaviour
                 //Debug.Log(targetCharacter.makeInvisible);
             }
 
-
-            ///record trial data
-            createExpDataSlot(out trialData);
-            trialDataList.Add(trialData);
-            //Debug.Log(JsonConvert.SerializeObject(trialData));
-            /// end record
-
             behaviorC.OnValidate();
             //Debug.Log("correctRate: " + behaviorC.correctRate);
         }
@@ -130,8 +127,7 @@ public class NewBehaviourScript : MonoBehaviour
             Debug.Log("Abort");
             behaviorC.touchTimefromInit = Time.time-behaviorC.initTime;
             if(ponCharacter.kinematicTime!=0){behaviorC.touchTimefromPause = Time.time-ponCharacter.kinematicTime;}
-            createExpDataSlot(out trialData);
-            trialDataList.Add(trialData);
+            
             behaviorC.OnValidate();
         }
                 
@@ -287,13 +283,14 @@ public class NewBehaviourScript : MonoBehaviour
     IEnumerator ThisIsIt(int how=0)
     {
         float waitbeforechoice = 1.0f;
-        
+        int Replay=0;
         switch(how)
         {
             case 0:
                 abortAllowed=false;
                 repeatCount = 0;  
                 int sessionLenth = 3;
+                
 
                 for(int i = behaviorC.session; i <= sessionLenth; i++)
                 {
@@ -331,7 +328,21 @@ public class NewBehaviourScript : MonoBehaviour
                 Fire(waitbeforechoice+ratio[k]);
                 timer = 0f;
                 yield return new WaitUntil(() => timer > waitbeforechoice+ratio[k]+0.5 || keyPressed == true);
+                if(keyPressed != true){
+                    behaviorC.choice = "abort";
+                   
+                    if(Replay <4){Replay += 1;
+                    l--;}
+                    else{Replay = 0;}
+                }
+                if(keyPressed == true){
+                    Replay = 0;
+                }
+                 //record
+                createExpDataSlot(out trialData);trialDataList.Add(trialData);
+                //
                 yield return new WaitForSeconds(0.5f);
+
                 DestroyPrefab(GameObject.Find("Pon(Clone)")); }}
 
                 }
@@ -342,6 +353,7 @@ public class NewBehaviourScript : MonoBehaviour
                 
                 abortAllowed = true;
                 sessionList = new int[] {3,4};
+       
 
                 for (int s = 0; s < sessionList.Length; s++){
                     defineSession(sessionList[s]);behaviorC.session = sessionList[s];
@@ -356,7 +368,8 @@ public class NewBehaviourScript : MonoBehaviour
                             camShelfCharacter.camID = camIDList[i];
                             camShelfCharacter.neck = camNeck[j];
                             targetCharacter.distance = targetDistance[d];
-                            for (int r=0; r<ratio.Length; r++)
+
+                for (int r=0; r<ratio.Length; r++)
                 {
                 behaviorC.ratio = ratio[r];
                 targetRandomize();  
@@ -364,6 +377,19 @@ public class NewBehaviourScript : MonoBehaviour
                 Fire(ratio[r]+waitbeforechoice);
                 timer = 0f;
                 yield return new WaitUntil(() => timer > waitbeforechoice+ratio[r]+0.5 || keyPressed == true);
+                if(keyPressed != true){
+                    behaviorC.choice = "abort";
+                   
+                    if(Replay <4){Replay += 1;
+                    r--;}
+                    else{Replay = 0;}
+                }
+                if(keyPressed == true){
+                    Replay = 0;
+                }
+                 //record
+                createExpDataSlot(out trialData);trialDataList.Add(trialData);
+                //
                 yield return new WaitForSeconds(0.5f);
                 DestroyPrefab(GameObject.Find("Pon(Clone)")); 
 
@@ -391,15 +417,17 @@ public class NewBehaviourScript : MonoBehaviour
     public ExpSaveFormat createExpDataSlot(out ExpSaveFormat trialData)
     {  ExpSaveFormat expData= new ExpSaveFormat();
 
-       {expData.trial = behaviorC.trial;
+       {
+        expData.trial = behaviorC.trial;
        expData.session= behaviorC.session;
        expData.choice = behaviorC.choice;
        expData.isCorrect = behaviorC.isCorrect;
         expData.touchTimefromInit= behaviorC.touchTimefromInit;
+        expData.touchTimefromPause = behaviorC.touchTimefromPause;
+        expData.correctRate = behaviorC.correctRate;
+
         expData.initTime = behaviorC.initTime;
         expData.pauseTime = ponCharacter.kinematicTime;
-        expData.touchTimefromPause = behaviorC.touchTimefromPause;
-
         expData.ratio = behaviorC.ratio;
         expData.vel_x = ponCharacter.vel_x;
         expData.vel_y = ponCharacter.vel_y;

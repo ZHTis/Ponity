@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -9,4 +10,7 @@ public class TrialState : ScriptableObject
     public int  FrameTag;
 
     public bool frameReadyToReset;
+    
+   
 }
+

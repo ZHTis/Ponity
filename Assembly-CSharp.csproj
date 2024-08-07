@@ -64,16 +64,69 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.15f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\MainCamera.cs" />
-    <Compile Include="Assets\Scripts\ExpSaveFormat.cs" />
-    <Compile Include="Assets\Scripts\camShelfCharacter.cs" />
-    <Compile Include="Assets\Scripts\Pon.cs" />
-    <Compile Include="Assets\Scripts\pathSimulator.cs" />
-    <Compile Include="Assets\Scripts\PonCharacter.cs" />
-    <Compile Include="Assets\Scripts\targetCharacter.cs" />
-    <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
-    <Compile Include="Assets\Scripts\behaviorCenter.cs" />
-    <Compile Include="Assets\Scripts\setTargert.cs" />
+    <Compile Include="Assets\Pon\Scripts\Pon.cs" />
+    <Compile Include="Assets\Pon\Scripts\PonCharacter.cs" />
+    <Compile Include="Assets\Smog\Coin.cs" />
+    <Compile Include="Assets\TobiiPro\ScreenBased\Scripts\Utility\CalibrationPoint.cs" />
+    <Compile Include="Assets\TobiiPro\ScreenBased\Scripts\Utility\GazeTrail.cs" />
+    <Compile Include="Assets\TobiiPro\Examples\SubscribingToUserPositionGuide.cs" />
+    <Compile Include="Assets\Pon\Scripts\targetCharacter.cs" />
+    <Compile Include="Assets\Pon\Scripts\pathSimulator.cs" />
+    <Compile Include="Assets\TobiiPro\ScreenBased\Scripts\EyeTracker.cs" />
+    <Compile Include="Assets\Pon\Scripts\behaviorCenter.cs" />
+    <Compile Include="Assets\Pon\Scripts\VRRig.cs" />
+    <Compile Include="Assets\TobiiPro\Common\Scripts\ExtensionMethods.cs" />
+    <Compile Include="Assets\Pon\Scripts\Cannon.cs" />
+    <Compile Include="Assets\Pon\Scripts\TobiiHandler.cs" />
+    <Compile Include="Assets\Pon\Scripts\NewBehaviourScript.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\Utility\VRSaveData.cs" />
+    <Compile Include="Assets\TobiiPro\ScreenBased\Scripts\Utility\ScreenBasedSaveData.cs" />
+    <Compile Include="Assets\Pon\Scripts\TrialStateMachine.cs" />
+    <Compile Include="Assets\Smog\SmogBehaviour.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\Utility\VRCalibration.cs" />
+    <Compile Include="Assets\TobiiPro\ScreenBased\Scripts\IGazeDataEye.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\VREyeTracker.cs" />
+    <Compile Include="Assets\Pon\Scripts\TrialState.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\Data\VRGazeData.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\Utility\VRPositioningGuide.cs" />
+    <Compile Include="Assets\Pon\Scripts\EyeFormat.cs" />
+    <Compile Include="Assets\TobiiPro\Examples\SubscribingToGazeData.cs" />
+    <Compile Include="Assets\TobiiPro\Common\Scripts\CalibrationThread.cs" />
+    <Compile Include="Assets\TobiiPro\ScreenBased\Scripts\Utility\Calibration.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\Utility\VRCalibrationPoint.cs" />
+    <Compile Include="Assets\Pon\Scripts\setTargert.cs" />
+    <Compile Include="Assets\TobiiPro\Common\Scripts\Data\UserPositionGuideData.cs" />
+    <Compile Include="Assets\TobiiPro\Examples\VRDemo\Scripts\VRPrefabDemo.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\Utility\VRUtility.cs" />
+    <Compile Include="Assets\TobiiPro\Examples\VRDemo\Scripts\TobiiControl.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\Utility\VRGazeTrail.cs" />
+    <Compile Include="Assets\TobiiPro\Common\Scripts\IUserPositionGuideData.cs" />
+    <Compile Include="Assets\Smog\coinHub.cs" />
+    <Compile Include="Assets\TobiiPro\Examples\ScreenBased\Scripts\ScreenBasedPrefabDemo.cs" />
+    <Compile Include="Assets\TobiiPro\Common\Scripts\EyeTrackerBase.cs" />
+    <Compile Include="Assets\Smog\TobiiHandler1.cs" />
+    <Compile Include="Assets\Pon\Scripts\MainCamera.cs" />
+    <Compile Include="Assets\TobiiPro\ScreenBased\Scripts\IGazeData.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\Utility\VRPositioningPlacementCanvas.cs" />
+    <Compile Include="Assets\TobiiPro\Common\Scripts\GazeTrailBase.cs" />
+    <Compile Include="Assets\Pon\Scripts\camShelfCharacter.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\IVRGazeDataEye.cs" />
+    <Compile Include="Assets\TobiiPro\ScreenBased\Scripts\Data\GazeData.cs" />
+    <Compile Include="Assets\TobiiPro\Examples\SubscribingToHMDGazeData.cs" />
+    <Compile Include="Assets\TobiiPro\VR\Scripts\IVRGazeData.cs" />
+    <Compile Include="Assets\Pon\Scripts\DataOutput.cs" />
+    <Compile Include="Assets\TobiiPro\ScreenBased\Scripts\Utility\TrackBoxGuide.cs" />
+    <Compile Include="Assets\Pon\Scripts\ExpSaveFormat.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\TobiiPro\Examples\VRDemo\Scenes\readme.txt" />
+    <None Include="Assets\TobiiPro\Examples\VRDemo\readme.txt" />
+    <None Include="Assets\TobiiPro\tobii_pro_prefabs.txt" />
+    <None Include="Assets\TobiiPro\VR\readme_hmd_pose_prediction.txt" />
+    <None Include="Assets\TobiiPro\ScreenBased\readme.txt" />
+    <None Include="Assets\TobiiPro\VR\readme.txt" />
+    <None Include="Assets\TobiiPro\Plugins\Tobii.Research.dll" />
+    <None Include="Assets\TobiiPro\Plugins\tobii_pro.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -416,16 +469,12 @@
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.9.1\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Tobii.Research">
+      <HintPath>Assets\TobiiPro\Plugins\Tobii.Research.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="AsyncIO">
-      <HintPath>Assets\Plugins\Pupil\3rd-party\AsyncIO.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="NetMQ">
-      <HintPath>Assets\Plugins\Pupil\3rd-party\NetMQ.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="mscorlib">
@@ -928,6 +977,66 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.15f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.Recorder.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Recorder.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Shared.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Recorder.Base">
+      <HintPath>Library\ScriptAssemblies\Unity.Recorder.Base.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
       <Private>False</Private>
@@ -938,14 +1047,6 @@
     </Reference>
     <Reference Include="Unity.ProBuilder.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
@@ -964,52 +1065,24 @@
       <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.ProBuilder">
-      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    <Reference Include="Unity.Recorder">
+      <HintPath>Library\ScriptAssemblies\Unity.Recorder.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AddOns.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.AddOns.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
@@ -1020,21 +1093,11 @@
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>Library\ScriptAssemblies\Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj" />
+    <ProjectReference Include="TobiiSDK.Editor.csproj" />
+    <ProjectReference Include="TobiiXRG2OM.csproj" />
+    <ProjectReference Include="TobiiSDK.csproj" />
   </ItemGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <ItemGroup>
