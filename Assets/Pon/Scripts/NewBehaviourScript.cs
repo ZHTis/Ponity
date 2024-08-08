@@ -9,9 +9,11 @@ using UnityEngine.Apple.ReplayKit;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+
     public Camera mainCamera ;
     public Camera Camera2 ;
     public Camera Camera3 ;
+    public Camera Camera4 ;
 
     private bool withMarker=false;//true;
     [SerializeField] private GameObject prefab;
@@ -50,6 +52,7 @@ public class NewBehaviourScript : MonoBehaviour
         behaviorC.Reset();
         trialDataList = new List<ExpSaveFormat>();
         ponCharacter.withMarker = withMarker;
+       
     }
 
     // Start is called before the first frame update
@@ -67,6 +70,17 @@ public class NewBehaviourScript : MonoBehaviour
         Camera2.enabled = true;
         mainCamera.enabled = false;
    }
+   IEnumerator Grey(){
+       mainCamera.enabled = false;
+       Camera4.enabled = true;
+       Camera3.enabled = false;
+       Camera2.enabled = false;
+       yield return new WaitForSeconds(0.8f);
+       Camera4.enabled = false;
+       Camera2.enabled = false;
+        mainCamera.enabled = true;
+        trialState.frameReadyToReset = true; Debug.Log("frameReadyToReset");
+   }
 
    IEnumerator exitBreak(){
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
@@ -77,6 +91,7 @@ public class NewBehaviourScript : MonoBehaviour
    void FinalBreak(){
        Camera3.enabled = true;
        Camera2.enabled = false;
+       Camera4.enabled = false;
        mainCamera.enabled = false;
 
    }
@@ -109,8 +124,9 @@ public class NewBehaviourScript : MonoBehaviour
             {
                 behaviorC.correctCount += 1;
                 behaviorC.isCorrect = true;
-                targetCharacter.makeInvisible = true;
+               // targetCharacter.makeInvisible = true; // make target invisible
                 //Debug.Log(targetCharacter.makeInvisible);
+                
             }
 
             behaviorC.OnValidate();
@@ -228,7 +244,7 @@ public class NewBehaviourScript : MonoBehaviour
             break;
 
         case 3:
-                ratio = new float[] {0.1f,0.15f,0.2f,0.25f,0.3f,0.35f,0.4f,0.5f,0.6f};
+                ratio = new float[] {1,0.1f,0.15f,0.2f,0.25f,0.3f,0.35f,0.4f,0.5f,0.6f};
                 camIDList = new int[] {1,2,3};
                 camShelfCharacter.radius = 8f;
                 ponCharacter.vel_x = 5;
@@ -239,7 +255,7 @@ public class NewBehaviourScript : MonoBehaviour
                 Physics.gravity = new Vector3(0, -9.8f, 0);
                 break;
         case 4:
-                ratio = new float[] {0.1f,0.15f,0.2f,0.25f,0.3f,0.35f,0.4f,0.5f,0.6f};
+                ratio = new float[] {1,0.1f,0.15f,0.2f,0.25f,0.3f,0.35f,0.4f,0.5f,0.6f};
                 camIDList = new int[] {1,2,3};
                 camShelfCharacter.radius = 8f;
                 ponCharacter.vel_x = 5;
@@ -284,7 +300,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         float waitbeforechoice = 1.0f;
         int Replay=0;
-        switch(how)
+        switch(how)//history lept
         {
             case 0:
                 abortAllowed=false;
@@ -394,12 +410,13 @@ public class NewBehaviourScript : MonoBehaviour
                 DestroyPrefab(GameObject.Find("Pon(Clone)")); 
 
                 trialState.frameReadyToReset = true;
+                StartCoroutine(Grey());
+                
                 } } } }
                 EnterBreak();StartCoroutine(exitBreak());
                 }
                 FinalBreak();
                 break;
-        
         }    
     }
 
