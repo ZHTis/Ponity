@@ -18,9 +18,13 @@ public class TrialBeginState : TState
     }
 
     public void OnEnter()
-    { }
+    { 
+        //definesession, record
+    }
     public void OnUpdate()
-    { int ifHasInput =0 ;
+    { 
+        //input, record
+        int ifHasInput =0 ;
         
         switch(ifHasInput)
         {   
@@ -35,7 +39,9 @@ public class TrialBeginState : TState
     
     }
     public void OnExit()
-    {  }
+    { 
+        //writeout
+     }
 
 }
 

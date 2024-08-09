@@ -5,6 +5,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System;
 using UnityEngine.Apple.ReplayKit;
+using System.Linq;
 
 
 public class NewBehaviourScript : MonoBehaviour
@@ -15,7 +16,7 @@ public class NewBehaviourScript : MonoBehaviour
     public Camera Camera3 ;
     public Camera Camera4 ;
 
-    private bool withMarker=false;//true;
+    private bool withMarker= false;//true;
     [SerializeField] private GameObject prefab;
     public ponCharacter ponCharacter;
     public targetCharacter targetCharacter;
@@ -112,6 +113,7 @@ public class NewBehaviourScript : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.L)) && keyPressed==false && mainCamera.enabled == true) 
         {
             behaviorC.choice = Input.inputString.ToString();
+            //Debug.Log(Input.inputString.ToString());
             keyPressed = true;
             behaviorC.touchTimefromInit = Time.time-behaviorC.initTime;
             if(ponCharacter.kinematicTime!=0){behaviorC.touchTimefromPause = Time.time-ponCharacter.kinematicTime;}
@@ -126,11 +128,9 @@ public class NewBehaviourScript : MonoBehaviour
                 behaviorC.isCorrect = true;
                // targetCharacter.makeInvisible = true; // make target invisible
                 //Debug.Log(targetCharacter.makeInvisible);
-                
-            }
 
-            behaviorC.OnValidate();
-            //Debug.Log("correctRate: " + behaviorC.correctRate);
+            }
+            createExpDataSlot(out trialData); trialDataList.Add(trialData);  behaviorC.OnValidate();
         }
 
         if(mainCamera.enabled == true &&
@@ -140,11 +140,10 @@ public class NewBehaviourScript : MonoBehaviour
                 {
             behaviorC.choice = "abort";
             keyPressed = true;
-            Debug.Log("Abort");
+            //Debug.Log("Abort");
             behaviorC.touchTimefromInit = Time.time-behaviorC.initTime;
             if(ponCharacter.kinematicTime!=0){behaviorC.touchTimefromPause = Time.time-ponCharacter.kinematicTime;}
-            
-            behaviorC.OnValidate();
+            createExpDataSlot(out trialData); trialDataList.Add(trialData);  behaviorC.OnValidate();
         }
                 
 
@@ -366,7 +365,7 @@ public class NewBehaviourScript : MonoBehaviour
                 break;
             
             case 1:
-                
+            // sequtially-run design
                 abortAllowed = true;
                 sessionList = new int[] {3,4};
        
@@ -399,13 +398,12 @@ public class NewBehaviourScript : MonoBehaviour
                     if(Replay <4){Replay += 1;
                     r--;}
                     else{Replay = 0;}
+                    createExpDataSlot(out trialData); trialDataList.Add(trialData);  behaviorC.OnValidate();
                 }
                 if(keyPressed == true){
                     Replay = 0;
                 }
-                 //record
-                createExpDataSlot(out trialData);trialDataList.Add(trialData);
-                //
+                
                 yield return new WaitForSeconds(0.5f);
                 DestroyPrefab(GameObject.Find("Pon(Clone)")); 
 
@@ -416,6 +414,23 @@ public class NewBehaviourScript : MonoBehaviour
                 EnterBreak();StartCoroutine(exitBreak());
                 }
                 FinalBreak();
+                break;
+        
+            case 2:
+            //fully randomized design
+                abortAllowed = true;
+                sessionList = new int[] {3,4};
+
+                for (int s = 0; s < sessionList.Length; s++){
+                //camlist
+                //camNeck
+                //targetDistance
+                //ratio
+                var combinations = camIDList.SelectMany(a => camNeck, (a, b) => new { a, b })
+                    .SelectMany(a => targetDistance, (a, b) => new { a, b })
+                    .SelectMany(a => ratio, (a, b) => new { a, b });
+                
+                }
                 break;
         }    
     }
