@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f31ee81b5cb4ed0a7351683de6392b, type: 3}
   m_Name: New Behavior Center
   m_EditorClassIdentifier: 
-  trial: 0
+  trial: 17
   session: 3
   session_interlude: 0
   repeatCount: 0
-  ratio: 0.1
-  correctCount: 0
-  correctRate: NaN
+  ratio: 0.15
+  correctCount: 9
+  correctRate: 0.5625
   isCorrect: 0
-  filePath: -08-06-16-51-40-2024
+  filePath: test-08-12-21-58-40-2024
   PlayerName: test
   choice: 
   touchTimefromInit: 0
   touchTimefromPause: 0
-  initTime: 0
+  initTime: 29.159786

@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 using System;
 using UnityEngine.Apple.ReplayKit;
 using System.Linq;
+using System.Drawing.Text;
+using Unity.VisualScripting;
 
 
 public class NewBehaviourScript : MonoBehaviour
@@ -63,13 +65,14 @@ public class NewBehaviourScript : MonoBehaviour
 
         EnterBreak();
         StartCoroutine(exitBreak());
-        StartCoroutine(ThisIsIt(1));
+        StartCoroutine(ThisIsIt(2));
     }
 
    void EnterBreak()
    {
         Camera2.enabled = true;
         mainCamera.enabled = false;
+        Camera4.enabled = false;
    }
    IEnumerator Grey(){
        mainCamera.enabled = false;
@@ -85,8 +88,8 @@ public class NewBehaviourScript : MonoBehaviour
 
    IEnumerator exitBreak(){
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
-        Camera2.enabled = false;
-        mainCamera.enabled = true;
+        StartCoroutine(Grey());
+         
    }
 
    void FinalBreak(){
@@ -268,8 +271,8 @@ public class NewBehaviourScript : MonoBehaviour
     }
     }
    
-   void Shuffle<T>(T[] array){
-    int n = array.Length;
+   void Shuffle<T>(List<T> list){
+    int n = list.Count;
     System.Random random = new System.Random();
 
             for (int i = 0; i < n - 1; i++)
@@ -278,14 +281,14 @@ public class NewBehaviourScript : MonoBehaviour
 
                 if (j != i)
                 {
-                    T temp = array[i];
-                    array[i] = array[j];
-                    array[j] = temp;
+                    T temp = list[i];
+                    list[i] = list[j];
+                    list[j] = temp;
                 }
             }
    }
 
-   void if_Shuffle<T>(T[] list, bool shuffle){
+   void if_Shuffle<T>(List<T> list, bool shuffle){
 
     if(shuffle){Shuffle(list);}
     if(!shuffle){}
@@ -297,7 +300,7 @@ public class NewBehaviourScript : MonoBehaviour
    /// <returns></returns>
     IEnumerator ThisIsIt(int how=0)
     {
-        float waitbeforechoice = 1.0f;
+        float waitbeforechoice = 2f;
         int Replay=0;
         switch(how)//history lept
         {
@@ -373,8 +376,8 @@ public class NewBehaviourScript : MonoBehaviour
                 for (int s = 0; s < sessionList.Length; s++){
                     defineSession(sessionList[s]);behaviorC.session = sessionList[s];
 
-                    if_Shuffle<int>(camIDList, ifShuffle);
-                    if_Shuffle<float>(camNeck, ifShuffle); //if change sessions in a decending order
+                    if_Shuffle(camIDList.ToList(), ifShuffle);
+                    if_Shuffle(camNeck.ToList(), ifShuffle); //if change sessions in a decending order
 
                     for (int i = 0; i < camIDList.Length; i++){
                     for (int j = 0; j < camNeck.Length; j++){
@@ -426,13 +429,60 @@ public class NewBehaviourScript : MonoBehaviour
                 //camNeck
                 //targetDistance
                 //ratio
-                var combinations = camIDList.SelectMany(a => camNeck, (a, b) => new { a, b })
-                    .SelectMany(a => targetDistance, (a, b) => new { a, b })
-                    .SelectMany(a => ratio, (a, b) => new { a, b });
-                
+                defineSession(sessionList[s]);
+                var combinations =  camIDList.SelectMany(neck => camNeck,(id,neck)=>new {id,neck})
+                    .SelectMany(f => targetDistance,(f,tar)=>new {f,tar})
+                    .SelectMany(e => ratio,(e,ratio)=>new {e,ratio});
+                var combinationList = new List<float[]>();
+                foreach (var combination in combinations){
+                    var it = new [] {combination.ratio,
+                        combination.e.tar, 
+                        combination.e.f.id, 
+                        combination.e.f.neck};
+                    combinationList.Add(it);
+                    //Debug.Log(it[0] + " , " + it[1] + " , " + it[2] + " , " + it[3]);
+                    }
+                if_Shuffle(combinationList,true);
+                Debug.Log($"sesssion{sessionList[s]} trails count: "+combinationList.Count);
+                //had shuffled
+                //start running
+                for(int i= 0; i < combinationList.Count; i++){
+                    //Debug.Log(combination[0]+" , "+combination[1]+" , "+combination[2]+" , "+combination[3]);
+
+                    var combination = combinationList[i];
+                    camShelfCharacter.camID = (int)combination[2];
+                    camShelfCharacter.neck = combination[3];  
+                    targetCharacter.distance = combination[1];
+                    behaviorC.ratio = combination[0];
+                    targetRandomize();
+                    yield return new WaitUntil(() => mainCamera.enabled == true);
+                    Fire(combination[0]+waitbeforechoice);
+                    timer = 0f;
+                    yield return new WaitUntil(() => timer > waitbeforechoice+combination[0]|| keyPressed == true);
+
+                    if(keyPressed != true){
+                        behaviorC.choice = "abort";
+                         if(Replay <2){Replay += 1;
+                            i--;
+                         }
+                    else{Replay = 0;}
+                    //Debug.Log(Replay+ "--" + combination[0]+" , "+combination[1]+" , "+combination[2]+" , "+combination[3]);
+                    createExpDataSlot(out trialData); trialDataList.Add(trialData);  behaviorC.OnValidate();
+                    }
+                    if(keyPressed == true){
+                        Replay = 0;
+                    }
+                DestroyPrefab(GameObject.Find("Pon(Clone)")); 
+
+                trialState.frameReadyToReset = true;
+                StartCoroutine(Grey());
                 }
+                
+                EnterBreak();StartCoroutine(exitBreak());
+                }
+                FinalBreak();
                 break;
-        }    
+        }
     }
 
     void DestroyPrefab(GameObject prefab)
@@ -491,8 +541,10 @@ public class NewBehaviourScript : MonoBehaviour
             DestroyPrefab(GameObject.Find("Pon(Clone)")); 
             }
     }
-}
 
+
+
+}
 
 
 

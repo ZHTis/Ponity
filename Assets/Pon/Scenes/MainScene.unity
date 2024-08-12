@@ -486,8 +486,8 @@ Transform:
   m_GameObject: {fileID: 528807977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
-  m_LocalPosition: {x: -0.1, y: 0, z: 0}
-  m_LocalScale: {x: 6.2744727, y: 1, z: 6.8406305}
+  m_LocalPosition: {x: -0.1, y: 12.1728, z: 0}
+  m_LocalScale: {x: 3.8399773, y: 1, z: 6.8406305}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 464523603}
@@ -1375,8 +1375,8 @@ Transform:
   m_GameObject: {fileID: 1653621673}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 24.5, y: 0, z: -24.7}
-  m_LocalScale: {x: 6.2744727, y: 1, z: 6.8406305}
+  m_LocalPosition: {x: 24.5, y: 11.8338, z: -6.7}
+  m_LocalScale: {x: 3.9077415, y: 1, z: 6.8406305}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 464523603}
@@ -1629,10 +1629,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Press Enter when you are ready, ^_^
-
-    ''a'' for left side, ''l'' for
-    right side,'' space '' to skip if you are not sure.'
+  m_Text: Press Enter when you are ready, ^_^
 --- !u!222 &1799393466
 CanvasRenderer:
   m_ObjectHideFlags: 0
