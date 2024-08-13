@@ -12,5 +12,6 @@ public class EyeFormat
     public long SystemTimeStamp;
     public int TrailTag;
     public int FrameTag;
+    public bool isGrey;
     public string Validity;//(lG,RG,LP,RP)
 }

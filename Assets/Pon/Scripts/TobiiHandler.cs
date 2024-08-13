@@ -95,6 +95,7 @@ public class TobiiHandler : MonoBehaviour
              LeftPupilData.Validity.ToString(), LeftPupilData.Validity.ToString());
         perEye.TrailTag = trialState.TrialTag;
         perEye.FrameTag = trialState.FrameTag;
+        perEye.isGrey = trialState.grey;
         eyeDataToSave.Add(perEye);
     }
 

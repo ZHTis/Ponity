@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
-using UnityEngine.Apple.ReplayKit;
+
+using UnityEngine.UI;
+
 public class Tutorial : MonoBehaviour
 {
 
@@ -22,7 +24,11 @@ public class Tutorial : MonoBehaviour
     public Camera mainCamera ;
     public Camera Camera2 ;
     public Camera Camera4 ;
-
+    private Text text; 
+    private Text textmain;
+    private string[] lines;
+    private GameObject tar;
+    private GameObject tar2;
 
      private int repeatCount;
     private float[] ratio;
@@ -33,19 +39,40 @@ public class Tutorial : MonoBehaviour
     private int[] camIDList;
     private bool abortAllowed=false;
 
-
+    void Awake(){
+        text = Camera2.GetComponentInChildren<Text>();
+        textmain= mainCamera.GetComponentInChildren<Text>();
+        tar =GameObject.Find("tar");
+        tar2 = GameObject.Find("tar2");
+       // Debug.Log(text.text); Debug.Log( textmain.text);
+    }
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(EnterBreak());
-        StartCoroutine(StartTutorial());
+        StartCoroutine(StartTutorial(1f));
     }
 
     IEnumerator EnterBreak(){
-         Camera2.enabled = true;
+        text.text = "Let's take a few minates to get used to the task.";
+        Camera2.enabled = true;
         mainCamera.enabled = false;
         Camera4.enabled = false;
         yield return new WaitForSeconds(1.8f);
+    
+        lines = new string[]
+            {"现在尝试按左边或者右边按钮",
+            "你可以多按几次， 熟悉按键的力度",
+            "接下来的5秒你可以 随便按两个按钮"};
+        text.text = string.Join("\n", lines);
+        yield return new WaitForSeconds(5f);
+
+         lines = new string[]
+            {"你已经熟悉了按钮",
+            "接下来尝试几个trial来熟悉实验任务"};
+        text.text = string.Join("\n", lines);
+        yield return new WaitForSeconds(2.8f);
+
         Camera2.enabled = false;
         StartCoroutine(Grey());
     }
@@ -57,14 +84,11 @@ public class Tutorial : MonoBehaviour
         timer += Time.deltaTime;
         claimAnswer();
 
-        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.L)) && keyPressed==false && mainCamera.enabled == true) 
+        if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.L)||Input.GetKeyDown(KeyCode.Space)) && keyPressed==false && mainCamera.enabled == true) 
         {
             behaviorC.choice = Input.inputString.ToString();
             //Debug.Log(Input.inputString.ToString());
             keyPressed = true;
-            behaviorC.touchTimefromInit = Time.time-behaviorC.initTime;
-            if(ponCharacter.kinematicTime!=0){behaviorC.touchTimefromPause = Time.time-ponCharacter.kinematicTime;}
-
             //Debug.Log("rightChoice: " + targetCharacter.rightChoice);
             //Debug.Log("choice: " + behaviorC.choice);
 
@@ -73,26 +97,42 @@ public class Tutorial : MonoBehaviour
             {
                 behaviorC.correctCount += 1;
                 behaviorC.isCorrect = true;
-               // targetCharacter.makeInvisible = true; // make target invisible
+                //targetCharacter.makeInvisible = true; // make target invisible
                 //Debug.Log(targetCharacter.makeInvisible);
-
+                
+                Camera4.GetComponentInChildren<Text>().text= "Correct!";
+            }
+           if(StringComparer.OrdinalIgnoreCase.Equals
+                (behaviorC.choice, targetCharacter.rightChoice) != true)
+            {
+                behaviorC.isCorrect = false;
+                Camera4.GetComponentInChildren<Text>().text= "Wrong!";
             }
          
         }
 
-        if(mainCamera.enabled == true &&
-                Input.GetKeyDown(KeyCode.Space) && 
-                keyPressed==false &&
-                abortAllowed==true)
-                {
-            behaviorC.choice = "abort";
-            keyPressed = true;
-            //Debug.Log("Abort");
-            behaviorC.touchTimefromInit = Time.time-behaviorC.initTime;
-            if(ponCharacter.kinematicTime!=0){behaviorC.touchTimefromPause = Time.time-ponCharacter.kinematicTime;}
+
+        if(mainCamera.enabled == false && Camera2.enabled == true &&
+            tar.GetComponent<MeshRenderer>().enabled == true)
+        {
+             if (Input.GetKeyDown(KeyCode.A )){
+                tar.GetComponent<MeshRenderer>().enabled = false;
+                timer =0;
+                //Debug.Log(tar.name);
+             }
+
+             if (Input.GetKeyDown(KeyCode.L)){
+                tar2.GetComponent<MeshRenderer>().enabled = false;
+                timer=0;
+             }
         }
+
+         if(mainCamera.enabled == false && Camera2.enabled == true && timer>0.2f)
+         {tar.GetComponent<MeshRenderer>().enabled = true;
+         tar2.GetComponent<MeshRenderer>().enabled = true;}
                 
     }
+
 
 
    void Shuffle<T>(List<T> list){
@@ -166,16 +206,16 @@ public class Tutorial : MonoBehaviour
     }
    
 
-    IEnumerator StartTutorial()
+    IEnumerator StartTutorial(float r)
     { 
         float waitbeforechoice = 2f;
-        ratio = new float[] {1,0.6f};
+        ratio = new float[] {r};
         camIDList = new int[] {1,2};
         camShelfCharacter.radius = 8f;
         ponCharacter.vel_x = 5;
         ponCharacter.vel_y = 0;
         targetDistance =new float[]{1.2f};
-        camNeck = new float[]{2} ;
+        camNeck = new float[]{3.5f,2} ;
         Physics.gravity = new Vector3(0, -9.8f, 0);
         targetCharacter.isParallelToViewCanvas = false; 
       
@@ -197,6 +237,22 @@ public class Tutorial : MonoBehaviour
                 //had shuffled
                 //start running
         for(int i= 0; i < combinationList.Count; i++){
+            if(r>0.6f){
+            lines = new string[]
+            {"小球掉在哪一个箱子里了呢?",
+            "左边按钮对应左边的箱子",
+            "右边按钮对应右边的箱子",
+            "选择你的答案"};
+            }
+            if(r<0.6f){
+                 lines = new string[]
+            {"小球将会掉在哪一个箱子里呢?",
+            "选择你的答案",
+            "如果你非常不确定答案，可以按空格跳过或者什么反应不都不做"};
+            }
+          
+        textmain.text = string.Join("\n", lines);
+
          //Debug.Log(combination[0]+" , "+combination[1]+" , "+combination[2]+" , "+combination[3]);
         var combination = combinationList[i];
         camShelfCharacter.camID = (int)combination[2];
@@ -207,13 +263,37 @@ public class Tutorial : MonoBehaviour
         yield return new WaitUntil(() => mainCamera.enabled == true);
         Fire(combination[0]+waitbeforechoice);
         timer = 0f;
-        yield return new WaitUntil(() => timer > waitbeforechoice+combination[0]|| keyPressed == true);
+        yield return new WaitUntil(() =>  keyPressed == true|| timer > 4);
 
     DestroyPrefab(GameObject.Find("Pon(Clone)")); 
     StartCoroutine(Grey());
-    }}
+    
+    }
+   if(r>0.6){lines = new string[]
+            {"有时候小球可见的运动时间会很短",
+            "现在提高难度",
+            "我们再试一遍",
+            "如果你非常不确定答案，可以按空格跳过或者什么反应不都不做"};
+        textmain.text = string.Join("\n", lines);
+    yield return new WaitForSeconds(2.8f);;
 
-       void DestroyPrefab(GameObject prefab)
+        StartCoroutine(StartTutorial(0.5f));
+   }
+
+   if(r<0.6){
+    lines = new string[]
+            {"你做得很好",
+            "现在准备开始正式测试吧!"};
+        textmain.text = string.Join("\n", lines);
+    yield return new WaitForSeconds(2.8f);
+
+        UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Tutorial");
+
+   }
+
+}
+
+    void DestroyPrefab(GameObject prefab)
     {   if (prefab != null){
         Destroy(prefab);}
     }
@@ -227,6 +307,8 @@ public class Tutorial : MonoBehaviour
         mainCamera.enabled = true;
     }
 
+void OnDestroy(){
+    UnityEngine.SceneManagement.SceneManager.LoadScene("MainScene");}
  
 }
 

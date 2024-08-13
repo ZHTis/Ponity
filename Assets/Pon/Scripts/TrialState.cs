@@ -8,7 +8,7 @@ public class TrialState : ScriptableObject
     
     public int TrialTag;
     public int  FrameTag;
-
+    public bool grey;
     public bool frameReadyToReset;
     
    

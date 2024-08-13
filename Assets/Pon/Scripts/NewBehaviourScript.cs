@@ -8,6 +8,7 @@ using UnityEngine.Apple.ReplayKit;
 using System.Linq;
 using System.Drawing.Text;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 
 public class NewBehaviourScript : MonoBehaviour
@@ -32,6 +33,7 @@ public class NewBehaviourScript : MonoBehaviour
     private ExpSaveFormat trialData;
     public TrialState trialState;
     private bool ifShuffle = false;
+    private Text text;
     
 
 
@@ -52,6 +54,7 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Awake(){
         Cursor.visible = false;
+        text= Camera2.GetComponentInChildren<Text>();
         behaviorC.Reset();
         trialDataList = new List<ExpSaveFormat>();
         ponCharacter.withMarker = withMarker;
@@ -63,13 +66,14 @@ public class NewBehaviourScript : MonoBehaviour
     {
         //StartCoroutine(DebugCharacter());
 
-        EnterBreak();
+        EnterBreak("Press Enter when you are ready, ^_^");
         StartCoroutine(exitBreak());
         StartCoroutine(ThisIsIt(2));
     }
 
-   void EnterBreak()
+   void EnterBreak(string message)
    {
+        text.text = message;
         Camera2.enabled = true;
         mainCamera.enabled = false;
         Camera4.enabled = false;
@@ -79,15 +83,16 @@ public class NewBehaviourScript : MonoBehaviour
        Camera4.enabled = true;
        Camera3.enabled = false;
        Camera2.enabled = false;
+       trialState.frameReadyToReset = true; trialState.grey = true;Debug.Log("frameReadyToResetGrey");
        yield return new WaitForSeconds(0.8f);
        Camera4.enabled = false;
        Camera2.enabled = false;
         mainCamera.enabled = true;
-        trialState.frameReadyToReset = true; Debug.Log("frameReadyToReset");
+        trialState.frameReadyToReset = true; trialState.grey = false;Debug.Log("frameReadyToReset");
    }
 
    IEnumerator exitBreak(){
-        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+        yield return new WaitUntil(() => Input.GetKey(KeyCode.Return));
         StartCoroutine(Grey());
          
    }
@@ -364,7 +369,7 @@ public class NewBehaviourScript : MonoBehaviour
                 DestroyPrefab(GameObject.Find("Pon(Clone)")); }}
 
                 }
-                } EnterBreak(); }}
+                } EnterBreak(""); }}
                 break;
             
             case 1:
@@ -414,7 +419,7 @@ public class NewBehaviourScript : MonoBehaviour
                 StartCoroutine(Grey());
                 
                 } } } }
-                EnterBreak();StartCoroutine(exitBreak());
+                EnterBreak("休息好了Enter开始继续测试 ^_^");StartCoroutine(exitBreak());
                 }
                 FinalBreak();
                 break;
@@ -448,7 +453,7 @@ public class NewBehaviourScript : MonoBehaviour
                 //start running
                 for(int i= 0; i < combinationList.Count; i++){
                     //Debug.Log(combination[0]+" , "+combination[1]+" , "+combination[2]+" , "+combination[3]);
-
+              
                     var combination = combinationList[i];
                     camShelfCharacter.camID = (int)combination[2];
                     camShelfCharacter.neck = combination[3];  
@@ -475,10 +480,21 @@ public class NewBehaviourScript : MonoBehaviour
                 DestroyPrefab(GameObject.Find("Pon(Clone)")); 
 
                 trialState.frameReadyToReset = true;
-                StartCoroutine(Grey());
-                }
                 
-                EnterBreak();StartCoroutine(exitBreak());
+                  if(behaviorC.trial %50==1 && behaviorC.trial>1)
+                {// take a break
+                    string[] lines = new string[]
+                        {$"你的正确率目前是{behaviorC.correctRate}",
+                        "休息一下",
+                        "休息好了Enter开始继续测试 ^_^"};
+                    string message = string.Join("\n", lines);
+                    EnterBreak(message);
+                    yield return new WaitUntil(() => Input.GetKey(KeyCode.Return));
+                }
+                StartCoroutine(Grey());
+
+                }
+    
                 }
                 FinalBreak();
                 break;
