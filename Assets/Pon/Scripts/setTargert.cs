@@ -36,7 +36,10 @@ public class anotherTargert : MonoBehaviour
             theOtherTarget.GetComponent<MeshRenderer>().enabled = true; 
             }
             
-            targetCharacter.setNow = false;}
+            targetCharacter.setNow = false;
+        }
+            
+
         if (targetCharacter.makeInvisible == true)
              {makeInvisible(theOtherTarget);}
 

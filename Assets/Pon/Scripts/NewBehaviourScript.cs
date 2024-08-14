@@ -104,9 +104,12 @@ public class NewBehaviourScript : MonoBehaviour
        mainCamera.enabled = false;
 
    }
-
+   
+       
     void Update()
     {
+    
+
         if( trialState.frameReadyToReset == false){
         trialState.FrameTag +=1;
       }
@@ -179,6 +182,7 @@ public class NewBehaviourScript : MonoBehaviour
         if(debugMode == true){
             targetCharacter.flaseChoiceIsLeft = 1;
             targetCharacter.Reset();
+            
         }
         else{
         System.Random random = new System.Random();

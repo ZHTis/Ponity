@@ -1732,6 +1732,7 @@ MonoBehaviour:
   Camera2: {fileID: 1716940013}
   Camera3: {fileID: 1049746812}
   Camera4: {fileID: 1866081979}
+  movingtar: {fileID: 0}
   prefab: {fileID: 8415762669439668880, guid: fa8b84f3c020341ccb1f82cee62be284, type: 3}
   ponCharacter: {fileID: 11400000, guid: 5fd42f7f43d9b4a8e9f6fa43abe73e4e, type: 2}
   targetCharacter: {fileID: 11400000, guid: 615c9e95e49ba42cd8bfe14a9dc41c68, type: 2}

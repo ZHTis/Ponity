@@ -9,17 +9,17 @@ public class coinHub : MonoBehaviour
     void Start()
     {
         InvokeRepeating("Spawn", 1f, 0.1f);
-        Spawn();
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        
     }
 
     private void Spawn()
     {
         Instantiate(prefab, new Vector3(50,2,2), Quaternion.identity);
+       Destroy(GameObject.Find("coin(Clone)"),1f);
     }
 }
