@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638584376873820855
-    m_Hash: 1010737747
+      ticks: 638593062565339668
+    m_Hash: 981840893
   m_LockFileStatus:
     m_FilePath: C:/Users/ZHT/Documents/Games/Ponity/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638584376873866173
-    m_Hash: 2044287630
+      ticks: 638593062571256521
+    m_Hash: 3623918025
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -338,13 +338,16 @@ m_ResolvedPackages:
     - 5.1.1
     - 5.2.0
     - 5.2.2
+    - 5.2.3
     - 6.0.1-pre.1
     - 6.0.1-pre.2
     - 6.0.1
+    - 6.0.2
     compatible:
     - 5.2.0
     - 5.2.2
-    recommended: 5.2.2
+    - 5.2.3
+    recommended: 5.2.3
     deprecated: []
   dependencies:
   - name: com.unity.settings-manager
@@ -2137,6 +2140,60 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 1.0.0
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+- packageId: com.unity.modules.uielementsnative@1.0.0
+  testable: 0
+  isDirectDependency: 1
+  version: 1.0.0
+  source: 2
+  resolvedPath: C:\Users\ZHT\Documents\Games\Ponity\Library\PackageCache\com.unity.modules.uielementsnative@1.0.0
+  assetPath: Packages/com.unity.modules.uielementsnative
+  name: com.unity.modules.uielementsnative
+  displayName: 
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: shim
+  description: 
+  status: 0
+  errors: []
+  versions:
+    all:
+    - 1.0.0
+    compatible:
+    - 1.0.0
+    recommended: 1.0.0
+    deprecated: []
+  dependencies: []
+  resolvedDependencies: []
+  keywords: []
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0

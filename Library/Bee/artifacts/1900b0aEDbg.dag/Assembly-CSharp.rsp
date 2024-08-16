@@ -113,6 +113,7 @@
 -define:ENABLE_TERRAIN
 -define:ENABLE_TILEMAP
 -define:ENABLE_TIMELINE
+-define:ENABLE_INPUT_SYSTEM
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:TEXTCORE_FONT_ENGINE_1_5_OR_NEWER
 -define:CSHARP_7_OR_LATER
@@ -377,11 +378,15 @@
 "Assets/Pon/Scripts/setTargert.cs"
 "Assets/Pon/Scripts/targetCharacter.cs"
 "Assets/Pon/Scripts/TobiiHandler.cs"
+"Assets/Pon/Scripts/TrialFSM.cs"
 "Assets/Pon/Scripts/TrialState.cs"
-"Assets/Pon/Scripts/TrialStateMachine.cs"
+"Assets/Pon/Scripts/TState.cs"
+"Assets/Pon/Scripts/Tutorial.cs"
 "Assets/Pon/Scripts/VRRig.cs"
 "Assets/Smog/Coin.cs"
 "Assets/Smog/coinHub.cs"
+"Assets/Smog/CollisonDetection.cs"
+"Assets/Smog/NewSmogBehaviour.cs"
 "Assets/Smog/SmogBehaviour.cs"
 "Assets/Smog/TobiiHandler1.cs"
 "Assets/TobiiPro/Common/Scripts/CalibrationThread.cs"
@@ -416,6 +421,7 @@
 "Assets/TobiiPro/VR/Scripts/Utility/VRSaveData.cs"
 "Assets/TobiiPro/VR/Scripts/Utility/VRUtility.cs"
 "Assets/TobiiPro/VR/Scripts/VREyeTracker.cs"
+"Assets/VirtualJoystick/Scripts/VirtualJoystick.cs"
 -langversion:9.0
 /unsafe+
 /deterministic
