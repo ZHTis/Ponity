@@ -3,6 +3,7 @@ using Terresquall;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class NewSmogBehaviour : MonoBehaviour
 {
@@ -34,7 +35,9 @@ public class NewSmogBehaviour : MonoBehaviour
     // Start is called before the first frame updatSS
     void Start()
     {
-        
+        smogVariants.time.Add(Time.time);
+        StartCoroutine(Thisisit());
+        Debug.Log(Time.time);
     }
 
     // Update is called once per frame
@@ -52,11 +55,12 @@ public class NewSmogBehaviour : MonoBehaviour
 
 
     IEnumerator Thisisit(){
+        
         for(int j=0; j<cannonPos.Length; j++){
-            cannon.transform.position = cannonPos[j];
-            yield return null;  //WaitUntil(()=>bowlFullfilled);
+            cannon.transform.position =cannonPos[j];
+            yield return new WaitUntil(() => count == 5);
+            count = 0;   smogVariants.uuidOfCatchedCoins.Clear();
+            smogVariants.time.Add(Time.time);
         }
     }
-
-
 }
