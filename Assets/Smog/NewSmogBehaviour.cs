@@ -1,16 +1,23 @@
 using System.Collections;
 using Terresquall;
 using UnityEngine;
-using UnityEngine.ProBuilder.Shapes;
+using System.Collections.Generic;
+using System.Linq;
 
 public class NewSmogBehaviour : MonoBehaviour
 {
     public GameObject cube;
     public GameObject cannon;
     public Vector3[] cannonPos;
+    public Variants smogVariants;
 
     private int bowlFilledWith;
     private bool bowlFullfilled;
+
+
+    public int count ;
+    public List<int> uuidOfCatchedCoins;
+    public List<int> CatchedCoins;
 
 
 
@@ -18,6 +25,10 @@ public class NewSmogBehaviour : MonoBehaviour
         cannonPos = new Vector3[]{new Vector3(-17,0.9f,5),
                 new Vector3(-18,0.9f,-6),
                 new Vector3(-15,0.9f,-6)};
+
+        smogVariants.uuidOfCatchedCoins = new List<int>();
+        uuidOfCatchedCoins = smogVariants.uuidOfCatchedCoins;
+        count = 0;
     }
 
     // Start is called before the first frame updatSS
@@ -33,7 +44,9 @@ public class NewSmogBehaviour : MonoBehaviour
         float x = VirtualJoystick.GetAxis("Vertical")*(1f);
         cube.transform.position += 2 * new Vector3(x,0,y) * Time.deltaTime;
         
-    
+        CatchedCoins = uuidOfCatchedCoins.Distinct().ToList();
+        count = CatchedCoins.Count ;
+        Debug.Log(count);
         
     }
 

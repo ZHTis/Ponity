@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 136084126}
   - component: {fileID: 136084128}
   - component: {fileID: 136084127}
+  - component: {fileID: 136084129}
   m_Layer: 0
   m_Name: CubeArea
   m_TagString: Untagged
@@ -150,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 136084125}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: -0, z: 0.36}
+  m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 1.72, y: -0.39, z: 1.72}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -206,6 +207,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136084125}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &136084129
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136084125}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0048677, y: 0.95659566, z: 0.9999997}
+  m_Center: {x: -0.0024302225, y: 0.021701753, z: -0.0000005428827}
 --- !u!1 &501055878
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,7 +881,7 @@ MeshCollider:
   m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1420092407
@@ -1166,45 +1188,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 283972490702495525, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
-      propertyPath: FPCamera
+    - target: {fileID: 3511663646867899370, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
+      propertyPath: cube
       value: 
-      objectReference: {fileID: 501055880}
-    - target: {fileID: 283972490702495525, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
-      propertyPath: gameObject
-      value: 
-      objectReference: {fileID: 501055880}
-    - target: {fileID: 5418441426900012431, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1960123954}
     - target: {fileID: 5418441426900012431, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
       propertyPath: m_Name
       value: coin
-      objectReference: {fileID: 0}
-    - target: {fileID: 6204802461346492413, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 271b00403dd2289459db2ea14e59a318, type: 2}
-    - target: {fileID: 6204802461346492413, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6204802461346492413, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
-      propertyPath: m_ProvidesContacts
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9009421256994791804, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.39999998
-      objectReference: {fileID: 0}
-    - target: {fileID: 9009421256994791804, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 9009421256994791804, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 9009421256994791804, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
       propertyPath: m_LocalPosition.x
