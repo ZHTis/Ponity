@@ -4,11 +4,9 @@ using UnityEngine;
 using System.IO; 
 using Newtonsoft.Json;
 using System;
-using UnityEngine.Apple.ReplayKit;
 using System.Linq;
-using System.Drawing.Text;
-using Unity.VisualScripting;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class NewBehaviourScript : MonoBehaviour
@@ -58,7 +56,8 @@ public class NewBehaviourScript : MonoBehaviour
         behaviorC.Reset();
         trialDataList = new List<ExpSaveFormat>();
         ponCharacter.withMarker = withMarker;
-       
+        Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        Screen.fullScreen = true; 
     }
 
     // Start is called before the first frame update
@@ -349,6 +348,7 @@ public class NewBehaviourScript : MonoBehaviour
                 ponCharacter.vel_y = ponVel_y[y];
                 ponCharacter.vel_x = ponVel_x[l];
                 targetCharacter.distance = targetDistance[j];
+                behaviorC.OnValidate();
                 behaviorC.ratio = ratio[k];
                 targetRandomize();  
                 ponCharacter.isKinematic = false;
@@ -513,7 +513,8 @@ public class NewBehaviourScript : MonoBehaviour
     void OnDestroy()
     {
         DataOutput dataOutput = new DataOutput();
-        dataOutput.SaveData<ExpSaveFormat>(trialDataList, "/Resources/", behaviorC.PlayerName); 
+        dataOutput.SaveData<ExpSaveFormat>(trialDataList, "/Resources/Pon/", behaviorC.PlayerName);
+        
     }
     
     public ExpSaveFormat createExpDataSlot(out ExpSaveFormat trialData)

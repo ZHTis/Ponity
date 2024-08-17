@@ -44,6 +44,9 @@ public class Tutorial : MonoBehaviour
         textmain= mainCamera.GetComponentInChildren<Text>();
         tar =GameObject.Find("tar");
         tar2 = GameObject.Find("tar2");
+
+        Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        Screen.fullScreen = true;
        // Debug.Log(text.text); Debug.Log( textmain.text);
     }
     // Start is called before the first frame update
@@ -258,6 +261,7 @@ public class Tutorial : MonoBehaviour
         camShelfCharacter.camID = (int)combination[2];
         camShelfCharacter.neck = combination[3];  
         targetCharacter.distance = combination[1];
+        behaviorC.OnValidate();
         behaviorC.ratio = combination[0];
         targetRandomize();
         yield return new WaitUntil(() => mainCamera.enabled == true);

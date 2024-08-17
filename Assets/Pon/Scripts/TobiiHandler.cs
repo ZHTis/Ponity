@@ -45,7 +45,7 @@ public class TobiiHandler : MonoBehaviour
    
     void Update()
     {
-      GazePlot();
+      //GazePlot();
       //Refresh tags
     }
 
@@ -118,7 +118,7 @@ public class TobiiHandler : MonoBehaviour
         Fourc.GazeDataReceived -= GazeEventHandler;
         }
         DataOutput dataOutpute = new DataOutput();
-        dataOutpute.SaveData<EyeFormat>(eyeDataToSave, "/Resources/EyeData/", behaviorC.PlayerName);
+        dataOutpute.SaveData<EyeFormat>(eyeDataToSave, "/Resources/PonEyeData/", behaviorC.PlayerName);
         Debug.Log("framecount"+trialState.FrameTag);
     }
 }

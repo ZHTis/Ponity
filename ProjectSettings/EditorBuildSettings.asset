@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Smog/smogTutorial.unity
+    guid: 5d5759bbfe1c00f4e87734b6171c0d07
+  - enabled: 1
+    path: Assets/Smog/Smog.unity
+    guid: 3eb90b1a3e7d4a24788ba3279cd256a0
+  - enabled: 1
     path: Assets/Pon/Scenes/tutorial.unity
     guid: af5d2ae4b682c874a9e699e2aacdca6c
   - enabled: 1

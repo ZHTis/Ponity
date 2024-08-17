@@ -9,6 +9,6 @@ public class smogStateFormat{
 
   public List<Vector3> cannonPos;
   public List<Vector3> cubePos;
-
+  public Vector3 cameraPos;
   
 }

@@ -3,13 +3,15 @@ using Terresquall;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using System;
+
 
 public class NewSmogBehaviour : MonoBehaviour
 {
     public GameObject cube;
     public GameObject cannon;
+    public Camera camerame;
+
     public Vector3[] cannonPos;
     public Vector3[] cubePos;
 
@@ -25,12 +27,14 @@ public class NewSmogBehaviour : MonoBehaviour
     private  Vector3 poscannon;
     private Vector3 poscube;
     private bool change;
-    private int frameId;
+
      private frameStateFormat frameState;
 
 
 
-    void Awake(){
+    void Awake()
+    {
+        smogVariants.Reset();
         cannonPos = new Vector3[]{new Vector3(-17,0.9f,5),
                 new Vector3(-18,0.9f,-6),
                 new Vector3(-15,0.9f,-6)};
@@ -43,22 +47,25 @@ public class NewSmogBehaviour : MonoBehaviour
         count = 0;
         timeEvents = new List<TimeEvent>();
         dataOutput = new DataOutput();
-        smogVariants.spawn = true;
         change = false;
         frameStateToSave = new List<frameStateFormat>();
+
+        Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
+        Screen.fullScreen = true;
+      
     }
 
     // Start is called before the first frame updatSS
     void Start()
     {
         StartCoroutine(Thisisit());
-        frameId = 0;
+        smogVariants.frameID = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        frameId++;
+        smogVariants.frameID ++;
 
         if(change!=true){
         float y = VirtualJoystick.GetAxis("Horizontal")*(-1);
@@ -74,12 +81,19 @@ public class NewSmogBehaviour : MonoBehaviour
 
         //save 
         frameState= new frameStateFormat();
-        { frameState.frameId = frameId;
+        { frameState.frameId = smogVariants.frameID;
         if(GameObject.Find("coin(Clone)")!=null) {
             GameObject coin = GameObject.Find("coin(Clone)");
             frameState.coinPosX = coin.transform.position.x;
             frameState.coinPosY = coin.transform.position.y;
             frameState.coinPosZ = coin.transform.position.z;
+            
+            //Vector3[] v=  coin.gameObject.GetComponent<Mesh>().vertices;
+            //Vector3[] screenPositions = new Vector3[v.Length];
+            //for (int i = 0; i < v.Length; i++){
+                //screenPositions[i] = camerame.WorldToScreenPoint(v[i]);
+            //}
+            
         }
         frameState.cubePosX = cube.transform.position.x;
         frameState.cubePosY = cube.transform.position.y;
@@ -110,21 +124,20 @@ public class NewSmogBehaviour : MonoBehaviour
 
 
     IEnumerator Thisisit(){
-        
+        yield return new WaitForSeconds(3f); 
         for(int j=0; j<3; j++){
             DefineScene(j);
             smogVariants.spawn = false;
             change = true;
+
             yield return new WaitUntil(() => cannon.transform.position == poscannon);
             change = false;
             yield return new WaitForSeconds(1f); 
             smogVariants.spawn = true;  
-
             TimeEvent timeEvent = new TimeEvent($"cannon_{j}_start",
                 new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds());
             Debug.Log(timeEvent.eventName + " " + timeEvent.timestamp);
             timeEvents.Add(timeEvent);
-            
             
             yield return new WaitUntil(() => count == 3);
             count = 0;   smogVariants.uuidOfCatchedCoins.Clear();
@@ -139,7 +152,8 @@ public class NewSmogBehaviour : MonoBehaviour
     void OnDestroy(){
         smogStateFormat smogState = new smogStateFormat();
        {smogState.timeEvents_name = new List<string>();
-       smogState.timeEvents_timestamp = new List<long>(); }
+       smogState.timeEvents_timestamp = new List<long>(); 
+       smogState.cameraPos =camerame.transform.position; }
 
         for(int i = 0; i < timeEvents.Count; i++){
             smogState.timeEvents_name.Add(timeEvents[i].eventName); 
@@ -151,8 +165,8 @@ public class NewSmogBehaviour : MonoBehaviour
         
 
         //Debug.Log(timeEvents.Count);
-        dataOutput.SaveDataSimple(smogState, "/Smog/Resources/state/", "smogState");
-        dataOutput.SaveData<frameStateFormat>(frameStateToSave, "/Smog/Resources/frameInfo/", "frameState");
+        dataOutput.SaveDataSimple(smogState, "/Resources/smog/state/", "smogState");
+        dataOutput.SaveData<frameStateFormat>(frameStateToSave, "/Resources/smog/frameInfo/", "frameState");
 }
 
 }

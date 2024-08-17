@@ -1732,7 +1732,6 @@ MonoBehaviour:
   Camera2: {fileID: 1716940013}
   Camera3: {fileID: 1049746812}
   Camera4: {fileID: 1866081979}
-  movingtar: {fileID: 0}
   prefab: {fileID: 8415762669439668880, guid: fa8b84f3c020341ccb1f82cee62be284, type: 3}
   ponCharacter: {fileID: 11400000, guid: 5fd42f7f43d9b4a8e9f6fa43abe73e4e, type: 2}
   targetCharacter: {fileID: 11400000, guid: 615c9e95e49ba42cd8bfe14a9dc41c68, type: 2}
@@ -1953,6 +1952,10 @@ PrefabInstance:
     - target: {fileID: 2543090876737791380, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
       propertyPath: m_Name
       value: TobiiHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 2543090876737791380, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3852853444243269278, guid: ebc0631f5273fe04fa07764727f99438, type: 3}
       propertyPath: m_SizeDelta.x
