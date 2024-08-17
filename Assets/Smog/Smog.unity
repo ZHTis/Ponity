@@ -700,7 +700,7 @@ Transform:
   m_GameObject: {fileID: 1247596656}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.45, y: 0.9, z: -6.23}
+  m_LocalPosition: {x: -14.87, y: 0.9, z: 4.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -943,7 +943,7 @@ Transform:
   m_GameObject: {fileID: 1420092405}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.67}
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -981,6 +981,7 @@ MonoBehaviour:
   prefab: {fileID: 654069245}
   Cannon: {fileID: 1247596656}
   aim: {fileID: 1960123954}
+  variants: {fileID: 11400000, guid: 6e623739e2bb6c444a09f8bf0fea8c79, type: 2}
   vector: {x: 0, y: 0, z: 0}
   spawInterval: 0.5
 --- !u!4 &1699753394
@@ -1045,6 +1046,12 @@ MonoBehaviour:
   cube: {fileID: 1960123954}
   cannon: {fileID: 1247596656}
   cannonPos: []
+  cubePos: []
+  smogVariants: {fileID: 11400000, guid: 6e623739e2bb6c444a09f8bf0fea8c79, type: 2}
+  count: 0
+  uuidOfCatchedCoins: 
+  CatchedCoins: 
+  spawn: 0
 --- !u!1 &1960123954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,9 +1080,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1960123954}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7034869, y: -0.07145756, z: -0.07145756, w: 0.7034869}
-  m_LocalPosition: {x: 3.5027, y: -2.15, z: -0.57}
-  m_LocalScale: {x: 0.51075, y: 0.5000001, z: 0.45265022}
+  m_LocalRotation: {x: -0.7034869, y: -0.071457565, z: -0.07145754, w: 0.7034869}
+  m_LocalPosition: {x: 3.3700008, y: -2.15, z: -0.38}
+  m_LocalScale: {x: 0.51075, y: 0.5000003, z: 0.4526506}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 136084126}
@@ -1192,6 +1199,10 @@ PrefabInstance:
       propertyPath: cube
       value: 
       objectReference: {fileID: 1960123954}
+    - target: {fileID: 3511663646867899370, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
+      propertyPath: variants
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e623739e2bb6c444a09f8bf0fea8c79, type: 2}
     - target: {fileID: 5418441426900012431, guid: 405da67bb9c31034d8a39e1d33ec0be0, type: 3}
       propertyPath: m_Name
       value: coin

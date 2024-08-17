@@ -23,4 +23,20 @@ public class DataOutput
         jsonData);
     }
 
+
+    public void SaveDataSimple<T>(T datatosave, string path, string name)
+    {
+       
+            string jsonData  =JsonUtility.ToJson(datatosave); 
+
+            if (!Directory.Exists(Application.dataPath + path)){
+            Directory.CreateDirectory(Application.dataPath + path);}
+        File.WriteAllText
+         (Application.dataPath + path + name + System.DateTime.Now.ToString("-MM-dd-HH-mm-ss-yyyy") + ".txt", 
+         jsonData);
+        
+       
+
+        
+    }
 }

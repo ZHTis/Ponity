@@ -7,6 +7,7 @@ using System;
 public class Variants : ScriptableObject
 {
     public List<int> uuidOfCatchedCoins;
-    public List<DateTime> time;
+    public bool spawn;
+   
 
 }
