@@ -82,12 +82,12 @@ public class NewBehaviourScript : MonoBehaviour
        Camera4.enabled = true;
        Camera3.enabled = false;
        Camera2.enabled = false;
-       trialState.frameReadyToReset = true; trialState.grey = true;Debug.Log("frameReadyToResetGrey");
+       trialState.frameReadyToReset = true; trialState.grey = true;//Debug.Log("frameReadyToResetGrey");
        yield return new WaitForSeconds(0.8f);
        Camera4.enabled = false;
        Camera2.enabled = false;
         mainCamera.enabled = true;
-        trialState.frameReadyToReset = true; trialState.grey = false;Debug.Log("frameReadyToReset");
+        trialState.frameReadyToReset = true; trialState.grey = false;//Debug.Log("frameReadyToReset");
    }
 
    IEnumerator exitBreak(){

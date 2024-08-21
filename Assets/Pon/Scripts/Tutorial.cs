@@ -29,7 +29,7 @@ public class Tutorial : MonoBehaviour
     private string[] lines;
     private GameObject tar;
     private GameObject tar2;
-
+    public GameObject interlude;
      private int repeatCount;
     private float[] ratio;
     private int[] ponVel_x;
@@ -60,6 +60,7 @@ public class Tutorial : MonoBehaviour
         text.text = "Let's take a few minates to get used to the task.";
         Camera2.enabled = true;
         mainCamera.enabled = false;
+        interlude.GetComponent<Text>().enabled = false;
         Camera4.enabled = false;
         yield return new WaitForSeconds(1.8f);
     
@@ -211,6 +212,7 @@ public class Tutorial : MonoBehaviour
 
     IEnumerator StartTutorial(float r)
     { 
+        interlude.GetComponent<Text>().enabled = true;
         float waitbeforechoice = 2f;
         ratio = new float[] {r};
         camIDList = new int[] {1,2};

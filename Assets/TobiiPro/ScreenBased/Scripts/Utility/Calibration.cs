@@ -1,4 +1,4 @@
-﻿//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // Copyright © 2019 Tobii Pro AB. All rights reserved.
 //-----------------------------------------------------------------------
 
@@ -157,7 +157,7 @@ namespace Tobii.Research.Unity
 
                 yield return new WaitForSeconds(0.1f);
             }
-
+    
             if (!_calibrationThread.Running)
             {
                 Debug.LogError("Failed to start calibration thread");
@@ -254,3 +254,4 @@ namespace Tobii.Research.Unity
         }
     }
 }
+

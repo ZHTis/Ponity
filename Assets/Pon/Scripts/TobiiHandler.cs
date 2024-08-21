@@ -10,9 +10,11 @@ using System.Security.Cryptography;
 public class TobiiHandler : MonoBehaviour
 {
     public GameObject cursor;
+    public GameObject[] cursori;
     public GameObject SizeLeft;
     public GameObject SizeRight;
     public Camera maincamera;
+    public Camera maincameraMain;
     public behaviorCenter behaviorC;
     public PupilData LeftPupilData;
     public PupilData RightPupilData;
@@ -25,13 +27,29 @@ public class TobiiHandler : MonoBehaviour
 
     public TrialState trialState;
 
+    
+    public GameObject[] markers;
+
+
+
+
+     void Dots(GameObject cursor, GameObject marker1)
+    {
+        Vector2 pos1= RectTransformUtility.WorldToScreenPoint(maincameraMain, marker1.transform.position);
+        cursor.GetComponent<RectTransform>().anchoredPosition = pos1;
+        Debug.Log($"{marker1.gameObject.name}"+pos1);
+    }
+
 
     void Awake(){
         Debug.Log("Awake:"+ Display.displays.Length);
         eyeDataToSave = new List<EyeFormat>();
         canvas = GetComponentInChildren<Canvas>().GetComponent<RectTransform>();
         trialState.FrameTag =0;
-
+        cursori = new GameObject[8];
+        for (int i = 0; i < 8; i++){
+            cursori[i] = Instantiate(cursor, cursor.transform.position, Quaternion.identity);
+        }
     }
 
     // Start is called before the first frame update
@@ -45,6 +63,10 @@ public class TobiiHandler : MonoBehaviour
    
     void Update()
     {
+        //Dots(cursor,markers[0]);
+        for (int i = 0; i < 8; i++){
+            Dots(cursori[i], markers[i]);
+        }
       //GazePlot();
       //Refresh tags
     }
@@ -104,7 +126,8 @@ public class TobiiHandler : MonoBehaviour
         Debug.Log(eyetracker.Count);
         Fourc = eyetracker[0];
         Debug.Log(string.Format("{0}, {1}, {2}, {3}, {4}", Fourc.Address, Fourc.DeviceName, Fourc.Model, Fourc.SerialNumber, Fourc.FirmwareVersion) );
-        
+        DisplayArea displayArea = Fourc.GetDisplayArea();
+        Debug.Log($"bottomleft: ,{ displayArea.BottomLeft.X}, topright: , {displayArea.TopRight.X}");
     }
     
     void Subscribe(){
