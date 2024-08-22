@@ -34,10 +34,12 @@ public class TobiiHandler1 : MonoBehaviour
     public List<EyeFormat> eyeDataToSave;
     public EyeFormat perEye;
     public Variants smogVariants;
-    
+    private Tobii.Research.Unity.GazeTrail _gazeTrail;
 
 
     void Awake(){
+        _gazeTrail = Tobii.Research.Unity.GazeTrail.Instance;
+
         Debug.Log("Awake:"+ Display.displays.Length);
         eyeDataToSave = new List<EyeFormat>();
         canvas = GetComponentInChildren<Canvas>().GetComponent<RectTransform>();
@@ -65,6 +67,7 @@ public class TobiiHandler1 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         cursor.transform.localScale = new Vector3(1f, 1f, 1f) ;
         ProGetDevice(); 
         Subscribe();
@@ -112,7 +115,7 @@ public class TobiiHandler1 : MonoBehaviour
         }
         smogFrameToSave.Add(dotSmog);
 
-      //GazePlot();
+        if(LeftPupilData != null){GazePlot();}
     }
 
      void Dots(GameObject cursor, GameObject marker1)
@@ -123,7 +126,7 @@ public class TobiiHandler1 : MonoBehaviour
     }
 
     private void GazePlot(){
-        if(LeftPupilData != null && RightPupilData != null){
+        if(LeftPupilData.Validity == Validity.Valid && RightPupilData.Validity == Validity.Valid){
         SizeLeft.GetComponent<RectTransform>().localScale = 
             new Vector3(LeftPupilData.PupilDiameter, LeftPupilData.PupilDiameter, LeftPupilData.PupilDiameter) *0.5f;
         SizeRight.GetComponent<RectTransform>().localScale = 

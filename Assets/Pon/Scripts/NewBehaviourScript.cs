@@ -74,6 +74,8 @@ public class NewBehaviourScript : MonoBehaviour
         StartCoroutine(ThisIsIt(2));
     }
 
+#region Code for Breaks 
+
    void EnterBreak(string message)
    {
         text.text = message;
@@ -107,7 +109,7 @@ public class NewBehaviourScript : MonoBehaviour
        mainCamera.enabled = false;
 
    }
-   
+#endregion
        
     void Update()
     {
@@ -164,7 +166,7 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
    
-
+#region  fire and set tar
   void Fire(float DestroyTime = 1.1f, bool realFire = true)
     {
        if(realFire == true)
@@ -212,12 +214,9 @@ public class NewBehaviourScript : MonoBehaviour
 
        else{}
     }
+#endregion
    
-   
-   /// <summary>
-   /// change session parameter here
-   /// </summary>
-   /// <param name="session"></param>
+#region define session
    void defineSession(int session)
    {
     switch(session)
@@ -307,10 +306,9 @@ public class NewBehaviourScript : MonoBehaviour
     if(!shuffle){}
    }
 
-   /// <summary>
-   /// main trial loop
-   /// </summary>
-   /// <returns></returns>
+#endregion
+
+#region ThisIsIt
     IEnumerator ThisIsIt(int how=0)
     {
         float waitbeforechoice = 2f;
@@ -380,7 +378,8 @@ public class NewBehaviourScript : MonoBehaviour
                 }
                 } EnterBreak(""); }}
                 break;
-            
+            #endregion
+            #region thisisit2
             case 1:
             // sequtially-run design
                 abortAllowed = true;
@@ -432,7 +431,8 @@ public class NewBehaviourScript : MonoBehaviour
                 }
                 FinalBreak();
                 break;
-        
+        #endregion
+        #region thisisit3
             case 2:
             //fully randomized design
                 abortAllowed = true;
@@ -508,7 +508,9 @@ public class NewBehaviourScript : MonoBehaviour
                 FinalBreak();
                 break;
         }
+        #endregion
     }
+    #region save when end
 
     void DestroyPrefab(GameObject prefab)
     {   if (prefab != null){
@@ -547,7 +549,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         return trialData = expData;
         }
-    
+    #endregion
     IEnumerator DebugCharacter()
     { ///for debug use only
        

@@ -447,7 +447,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114351420092762336, guid: 98f9dcb9f02165c45b532126e853b0e1, type: 3}
       propertyPath: _particleSize
-      value: 0.065
+      value: 0.0631
+      objectReference: {fileID: 0}
+    - target: {fileID: 199794883758710688, guid: 98f9dcb9f02165c45b532126e853b0e1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 199794883758710688, guid: 98f9dcb9f02165c45b532126e853b0e1, type: 3}
       propertyPath: m_Materials.Array.size

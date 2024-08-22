@@ -113,42 +113,11 @@ public class TobiiHandler : MonoBehaviour
             dotsPon.ponPos.Add(new System.Numerics.Vector2(ponposc.x, ponposc.y) );
         }
         }}
-        dotsPonToSave.Add(dotsPon);
-      //GazePlot();
+        dotsPonToSave.Add(dotsPon);     
+        if(LeftPupilData != null){GazePlot();}
     }
 
-     void Dots(GameObject cursor, GameObject marker1)
-    {
-        Vector2 pos1= RectTransformUtility.WorldToScreenPoint(maincameraMain, marker1.transform.position);
-        cursor.GetComponent<RectTransform>().anchoredPosition = pos1;
-        //Debug.Log($"{marker1.gameObject.name}"+pos1);
-    }
-
-
-
-    private void GazePlot(){
-        if(LeftPupilData != null && RightPupilData != null){
-        SizeLeft.GetComponent<RectTransform>().localScale = 
-            new Vector3(LeftPupilData.PupilDiameter, LeftPupilData.PupilDiameter, LeftPupilData.PupilDiameter) *0.5f;
-        SizeRight.GetComponent<RectTransform>().localScale = 
-            new Vector3(RightPupilData.PupilDiameter, RightPupilData.PupilDiameter, RightPupilData.PupilDiameter) *0.5f;
-       
-        float x = 0.5f * (LeftGaze.PositionOnDisplayArea.X + RightGaze.PositionOnDisplayArea.X);
-        float y = 0.5f * (LeftGaze.PositionOnDisplayArea.Y + RightGaze.PositionOnDisplayArea.Y);
-        //Debug.Log("gaze: "+new Vector2(x,y));
-       
-        
-        float width = canvas.rect.width;
-        float height = canvas.rect.height;
-        float cursorX = width * x;
-        float cursorY = height * y;
-        cursor.GetComponent<RectTransform>().anchoredPosition = new Vector2(cursorX, cursorY);
-        //Debug.Log("cursor"+cursor.GetComponent<RectTransform>().anchoredPosition);
-        }
-
-    }
-
-    void  GazeEventHandler (object sender , GazeDataEventArgs e)
+       void  GazeEventHandler (object sender , GazeDataEventArgs e)
     {
         //Debug.Log("sender: "+sender);
         LeftGaze = e.LeftEye.GazePoint;
@@ -173,7 +142,42 @@ public class TobiiHandler : MonoBehaviour
         perEye.FrameTag = trialState.FrameTag;
         perEye.isGrey = trialState.grey;
         eyeDataToSave.Add(perEye);
+        
     }
+
+     void Dots(GameObject cursor, GameObject marker1)
+    {
+        Vector2 pos1= RectTransformUtility.WorldToScreenPoint(maincameraMain, marker1.transform.position);
+        cursor.GetComponent<RectTransform>().anchoredPosition = pos1;
+        //Debug.Log($"{marker1.gameObject.name}"+pos1);
+    }
+
+
+
+    private void GazePlot(){
+        if(LeftPupilData.Validity == Validity.Valid && RightPupilData.Validity == Validity.Valid ){
+        SizeLeft.GetComponent<RectTransform>().localScale = 
+            new Vector3(LeftPupilData.PupilDiameter, LeftPupilData.PupilDiameter, LeftPupilData.PupilDiameter) *0.5f;
+        SizeRight.GetComponent<RectTransform>().localScale = 
+            new Vector3(RightPupilData.PupilDiameter, RightPupilData.PupilDiameter, RightPupilData.PupilDiameter) *0.5f;
+       
+        float x = 0.5f * (LeftGaze.PositionOnDisplayArea.X + RightGaze.PositionOnDisplayArea.X);
+        float y = 0.5f * (LeftGaze.PositionOnDisplayArea.Y + RightGaze.PositionOnDisplayArea.Y);
+        //Debug.Log("gaze: "+new Vector2(x,y));
+       
+        
+        float width = canvas.rect.width;
+        float height = canvas.rect.height;
+        float cursorX = width * x;
+        float cursorY = height * y;
+        cursor.GetComponent<RectTransform>().anchoredPosition = new Vector2(cursorX, cursorY);
+        //Debug.Log("cursor"+cursor.GetComponent<RectTransform>().anchoredPosition);
+        }
+        else{Debug.Log("pupil null");}
+
+    }
+
+ 
 
     private void  ProGetDevice(){
         var eyetracker = EyeTrackingOperations.FindAllEyeTrackers();
