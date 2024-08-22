@@ -34,9 +34,7 @@ public class DataOutput
         File.WriteAllText
          (Application.dataPath + path + name + System.DateTime.Now.ToString("-MM-dd-HH-mm-ss-yyyy") + ".txt", 
          jsonData);
-        
-       
 
-        
     }
 }
+

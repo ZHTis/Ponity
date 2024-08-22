@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 
 public class NewBehaviourScript : MonoBehaviour
@@ -24,15 +25,17 @@ public class NewBehaviourScript : MonoBehaviour
     public camShelfCharacter camShelfCharacter;
     public behaviorCenter behaviorC;
     private List<ExpSaveFormat> trialDataList;
+    private ExpSaveFormat trialData;
+  
+
     private float spawnInterval ;
     public enum rightChoice  {a,l}
     private bool keyPressed =false;
     private float timer;
-    private ExpSaveFormat trialData;
+    
     public TrialState trialState;
     private bool ifShuffle = false;
     private Text text;
-    
 
 
 /// <summary>
@@ -55,6 +58,7 @@ public class NewBehaviourScript : MonoBehaviour
         text= Camera2.GetComponentInChildren<Text>();
         behaviorC.Reset();
         trialDataList = new List<ExpSaveFormat>();
+        
         ponCharacter.withMarker = withMarker;
         Screen.fullScreenMode = FullScreenMode.ExclusiveFullScreen;
         Screen.fullScreen = true; 
@@ -107,7 +111,6 @@ public class NewBehaviourScript : MonoBehaviour
        
     void Update()
     {
-    
 
         if( trialState.frameReadyToReset == false){
         trialState.FrameTag +=1;
@@ -157,8 +160,10 @@ public class NewBehaviourScript : MonoBehaviour
         }
                 
 
+        
     }
 
+   
 
   void Fire(float DestroyTime = 1.1f, bool realFire = true)
     {

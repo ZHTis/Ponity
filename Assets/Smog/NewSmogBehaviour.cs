@@ -27,7 +27,7 @@ public class NewSmogBehaviour : MonoBehaviour
     private  Vector3 poscannon;
     private Vector3 poscube;
     private bool change;
-
+    private Vector3 cameramePos;
      private frameStateFormat frameState;
 
 
@@ -41,6 +41,7 @@ public class NewSmogBehaviour : MonoBehaviour
 
         cubePos = new Vector3[]{new Vector3(-22,0.4f,2.2f),
                 new Vector3 (-28,0.4f,-0.4f)};
+        cameramePos=camerame.transform.position;
 
         smogVariants.uuidOfCatchedCoins = new List<int>();
         uuidOfCatchedCoins = smogVariants.uuidOfCatchedCoins;
@@ -153,7 +154,7 @@ public class NewSmogBehaviour : MonoBehaviour
         smogStateFormat smogState = new smogStateFormat();
        {smogState.timeEvents_name = new List<string>();
        smogState.timeEvents_timestamp = new List<long>(); 
-       smogState.cameraPos =camerame.transform.position; }
+       smogState.cameraPos =cameramePos; }
 
         for(int i = 0; i < timeEvents.Count; i++){
             smogState.timeEvents_name.Add(timeEvents[i].eventName); 
@@ -162,7 +163,6 @@ public class NewSmogBehaviour : MonoBehaviour
             smogState.cannonPos = cannonPos.ToList();
             smogState.cubePos = cubePos.ToList();
             }
-        
 
         //Debug.Log(timeEvents.Count);
         dataOutput.SaveDataSimple(smogState, "/Resources/smog/state/", "smogState");

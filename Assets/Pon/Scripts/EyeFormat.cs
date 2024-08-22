@@ -10,6 +10,7 @@ public class EyeFormat
     public float LeftPupilSize;
     public float RightPupilSize;// in 
     public long SystemTimeStamp;
+
     public int TrailTag;
     public int FrameTag;
     public bool isGrey;
