@@ -61,6 +61,7 @@ public class NewSmogBehaviour : MonoBehaviour
     {
         StartCoroutine(Thisisit());
         smogVariants.frameID = 0;
+      
     }
 
     // Update is called once per frame
@@ -68,7 +69,7 @@ public class NewSmogBehaviour : MonoBehaviour
     {
         smogVariants.frameID ++;
 
-        if(change!=true){
+        if(change!=true){smogVariants.isRecording=true;
         float y = VirtualJoystick.GetAxis("Horizontal")*(-1);
         float x = VirtualJoystick.GetAxis("Vertical")*(1f);
         cube.transform.position += 2 * new Vector3(x,0,y) * Time.deltaTime;
@@ -78,7 +79,8 @@ public class NewSmogBehaviour : MonoBehaviour
         Debug.Log("count:"+ count);}
         
         if(change==true ){cannon.transform.position = Vector3.MoveTowards(cannon.transform.position,poscannon, 1.5f*Time.deltaTime);
-        cube.transform.position = Vector3.MoveTowards(cube.transform.position,poscube, 1.5f*Time.deltaTime);}
+        cube.transform.position = Vector3.MoveTowards(cube.transform.position,poscube, 1.5f*Time.deltaTime);
+        smogVariants.isRecording=false;}
 
         //save 
         frameState= new frameStateFormat();
@@ -88,22 +90,16 @@ public class NewSmogBehaviour : MonoBehaviour
             frameState.coinPosX = coin.transform.position.x;
             frameState.coinPosY = coin.transform.position.y;
             frameState.coinPosZ = coin.transform.position.z;
-            
-            //Vector3[] v=  coin.gameObject.GetComponent<Mesh>().vertices;
-            //Vector3[] screenPositions = new Vector3[v.Length];
-            //for (int i = 0; i < v.Length; i++){
-                //screenPositions[i] = camerame.WorldToScreenPoint(v[i]);
-            //}
-            
+           
         }
         frameState.cubePosX = cube.transform.position.x;
         frameState.cubePosY = cube.transform.position.y;
         frameState.cubePosZ = cube.transform.position.z; 
-        
+        frameState.virtualJoystick =new System.Numerics.Vector2(VirtualJoystick.GetAxis("Horizontal"),VirtualJoystick.GetAxis("Vertical"));
         frameState.timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
         }
         frameStateToSave.Add(frameState);
-
+        //save ended
     }
 
 
@@ -130,17 +126,18 @@ public class NewSmogBehaviour : MonoBehaviour
             DefineScene(j);
             smogVariants.spawn = false;
             change = true;
-
+            smogVariants.spawn = true;  
             yield return new WaitUntil(() => cannon.transform.position == poscannon);
             change = false;
-            yield return new WaitForSeconds(1f); 
-            smogVariants.spawn = true;  
+        
+            yield return new WaitForSeconds(0.5f); 
+            
             TimeEvent timeEvent = new TimeEvent($"cannon_{j}_start",
                 new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds());
             Debug.Log(timeEvent.eventName + " " + timeEvent.timestamp);
             timeEvents.Add(timeEvent);
-            
             yield return new WaitUntil(() => count == 3);
+
             count = 0;   smogVariants.uuidOfCatchedCoins.Clear();
             TimeEvent timeEvent2 = new TimeEvent($"cannon_{j}_completed", 
                 new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds());
@@ -167,6 +164,7 @@ public class NewSmogBehaviour : MonoBehaviour
         //Debug.Log(timeEvents.Count);
         dataOutput.SaveDataSimple(smogState, "/Resources/smog/state/", "smogState");
         dataOutput.SaveData<frameStateFormat>(frameStateToSave, "/Resources/smog/frameInfo/", "frameState");
+        smogVariants.isRecording = false;
 }
 
 }

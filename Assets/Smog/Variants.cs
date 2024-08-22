@@ -9,6 +9,7 @@ public class Variants : ScriptableObject
     public List<int> uuidOfCatchedCoins;
     public bool spawn;
     public int frameID;
+    public bool isRecording;
 
     public void Reset(){
         uuidOfCatchedCoins = new List<int>();

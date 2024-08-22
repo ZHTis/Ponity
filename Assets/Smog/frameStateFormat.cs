@@ -17,6 +17,7 @@ public class frameStateFormat
     public float  cubeScreenPosX;   
     public float  cubeScreenPosY;
 
+    public System.Numerics.Vector2 virtualJoystick;
     public int frameId;
     public long timestamp;
     
